@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Container, Row, Col } from "react-bootstrap";
+import React, { useState } from "react";
+import Content from "./components/Content";
+import Banner from "./components/Banner";
+import Header from "./components/Header";
 function App() {
+
+  const [filter, setFilter] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container fluid className="p-0">
+      <Header />
+      <style type="text/css">
+        {`
+        .content {
+          padding: 20px;
+            }
+        .banner {
+          background - color: #343a40;
+        color: white;
+        padding: 20px;
+        text-align: center;
+            }
+       
+          `}
+      </style>
+      <Row>
+        <Col xs={3} className="sidebar">
+          <Banner onFilterChange={setFilter} />
+        </Col>
+        <Col xs={9} className="content">
+          <Content filter={filter}/>
+        </Col>
+      </Row>
+
+    </Container>
   );
 }
-
 export default App;
