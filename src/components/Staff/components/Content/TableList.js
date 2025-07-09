@@ -1,4 +1,4 @@
-import TableCard from "./TableCard";
+import TableCard from "../Content/TableCard";
 import '../css/style.css';
 import { Row, Col } from "react-bootstrap";
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Form, Row, Col, Button, Nav, Container } from 'react-bootstrap';
-import './styles/header.css'
+import '../Header/header.css'
 
 function Header() {
   return (
