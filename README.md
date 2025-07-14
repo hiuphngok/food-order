@@ -68,3 +68,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## NOTICE
+
+### `npx json-server --watch db.json --port 9999`
+
+If you encounter an error when executing the put, post, patch methods that the id is converted from number to string, run the node file fix-id.js, then restart the JSON-Server to read the new data.
