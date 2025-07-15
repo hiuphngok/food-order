@@ -9,61 +9,63 @@ import OrderManager from "./Admin/OrderManager";
 import AccountManager from "./Admin/AccountManager";
 import MenuManager from "./Admin/MenuManager";
 import DashBoard from "./Admin/DashBoard";
+import PreOrderPage from "./Customer/PreOrderInfor";
 import TableManager from "./Admin/TableManager";
 
-export default function App(){
-    const [user, setUser] = useState(null);
-    const navigate = useNavigate();
+export default function App() {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const checkUser = () => {
-            const savedUser = JSON.parse(localStorage.getItem("user"));
-            if (savedUser) setUser(savedUser);
-        };
+  useEffect(() => {
+    const checkUser = () => {
+      const savedUser = JSON.parse(localStorage.getItem("user"));
+      if (savedUser) setUser(savedUser);
+    };
 
-        checkUser();
+    checkUser();
 
-        window.addEventListener("storage", checkUser);
-        return () => window.removeEventListener("storage", checkUser);
-    }, []);
+    window.addEventListener("storage", checkUser);
+    return () => window.removeEventListener("storage", checkUser);
+  }, []);
 
-    if (!user) {
+  if (!user) {
     return (
-        <Routes>
+      <Routes>
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="*" element={<Navigate to="/login" />} />
-        </Routes>
+      </Routes>
     );
-    }
-    
-    return (
-        <Routes>
-            <Route path="/login" element={<Login setUser={setUser} />} />
-            {user.roleId === 1 && (
-                <>
-                <Route path="/" element={<CustomerScreen setUser={setUser} />} />
-                <Route path="*" element={<Navigate to="/" />} />
-                </>
-            )}
-            {user.roleId === 2 && (
-                <>
-                <Route path="/staff" element={<Staff setUser={setUser} />} />
-                <Route path="*" element={<Navigate to="/staff" />} />
-                </>
-            )}
-            {user.roleId === 3 && (
-                <>
-                <Route path="/admin" element={<Admin_dashboard setUser={setUser} />}>
-                    <Route index element={<DashBoard />} />
-                    <Route path="menu" element={<MenuManager />} />
-                    <Route path="orders" element={<OrderManager />} />
-                    <Route path="users" element={<AccountManager />} />
-                    <Route path="tables" element={<TableManager />} />
-                </Route>
-                <Route path="*" element={<Navigate to="/admin" />} />
-                </>
-            )}
-        </Routes>
-    );
+  }
+
+  return (
+    <Routes>
+      <Route path="/login" element={<Login setUser={setUser} />} />
+      {user.roleId === 1 && (
+        <>
+          <Route path="/pre-order" element={<PreOrderPage />} />
+          <Route path="/" element={<CustomerScreen setUser={setUser} />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </>
+      )}
+      {user.roleId === 2 && (
+        <>
+          <Route path="/staff" element={<Staff setUser={setUser} />} />
+          <Route path="*" element={<Navigate to="/staff" />} />
+        </>
+      )}
+      {user.roleId === 3 && (
+        <>
+          <Route path="/admin" element={<Admin_dashboard setUser={setUser} />}>
+            <Route index element={<DashBoard />} />
+            <Route path="menu" element={<MenuManager />} />
+            <Route path="orders" element={<OrderManager />} />
+            <Route path="users" element={<AccountManager />} />
+            <Route path="tables" element={<TableManager />} />
+          </Route>
+          <Route path="*" element={<Navigate to="/admin" />} />
+        </>
+      )}
+    </Routes>
+  );
 
 }

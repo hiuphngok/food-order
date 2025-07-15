@@ -12,10 +12,11 @@ const PreOrderPage = () => {
   const [newQuantity, setNewQuantity] = useState(1);
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
+  const user = JSON.parse(localStorage.getItem('user'));
+  const tableId = user?.tableId;
+
 
   useEffect(() => {
-    const tableId = 2;
-
     axios.get('http://localhost:9999/menu')
       .then(res => setMenu(res.data));
 
@@ -117,7 +118,7 @@ const PreOrderPage = () => {
           <Card className="shadow-sm">
             <Card.Header className="bg-warning text-dark">
               <h5 className="mb-0 d-flex align-items-center gap-2">
-                <ShoppingCart size={20} /> Your Order - Table 2
+                <ShoppingCart size={20} /> Your Order - Table {tableId}
               </h5>
             </Card.Header>
             <Card.Body>

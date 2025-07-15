@@ -18,7 +18,9 @@ function CartModal({ show, onClose, cart, changeQuantity, removeItem, total }) {
   };
 
   const handleSubmitOrder = () => {
-    const tableId = 2; // sau này có thể lấy từ user login
+    const user = JSON.parse(localStorage.getItem("user"));
+    const tableId = user?.tableId;
+
 
     const itemsWithServeTime = cart.map(item => ({
       menuId: item.id,
