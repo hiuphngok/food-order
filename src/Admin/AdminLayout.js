@@ -1,7 +1,6 @@
 import Admin_Header from '../components/Header/Header';
 import Admin_SideBar from '../components/SideBar/Admin_SideBar';
 import { Row, Col, Container } from 'react-bootstrap';
-import AdminRoutes from './AdminRoutes';
 import { Outlet } from 'react-router-dom';
 
 export default function Admin_dashboard({ setUser }){
