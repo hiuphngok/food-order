@@ -2,15 +2,19 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Form, Row, Col, Button, Nav, Container } from 'react-bootstrap';
 import './index.css'
+import { useNavigate } from 'react-router-dom';
+import { hover } from '@testing-library/user-event/dist/hover';
 
 function Header() {
+  const navigate = useNavigate()
+
   return (
     <Navbar expand="lg" variant="dark" fixed="top" style={{ backgroundColor: '#0a0a0a' }}>
       <Container fluid>
         <Row className="align-items-center w-100">
 
           <Col md={3}>
-            <Navbar.Brand href="#">Food Order</Navbar.Brand>
+            <Navbar.Brand style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>Food Order</Navbar.Brand>
           </Col>
 
           <Col md={6}>

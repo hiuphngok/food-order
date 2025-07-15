@@ -39,37 +39,35 @@ function CustomerScreen() {
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <BrowserRouter>
-      <div>
-        <Header />
-        <Home addToCart={addToCart} />
-        {/* <TotalAmount /> */}
-        <CartModal
-          show={showCart}
-          onClose={() => setShowCart(false)}
-          cart={cart}
-          changeQuantity={changeQuantity}
-          removeItem={removeItem}
-          total={total}
-        />
-        <button
-          style={{
-            position: 'fixed',
-            bottom: 0,
-            right: 0,
-            backgroundColor: 'orange',
-            padding: '12px 20px',
-            fontWeight: 'bold',
-            borderTopLeftRadius: '5px',
-            cursor: 'pointer',
-            border: '1px solid black'
-          }}
-          onClick={() => setShowCart(true)}
-        >
-          🛒 {total.toLocaleString()}₫
-        </button>
-      </div>
-    </BrowserRouter>
+    <div>
+      <Header />
+      <Home addToCart={addToCart} />
+      {/* <TotalAmount /> */}
+      <CartModal
+        show={showCart}
+        onClose={() => setShowCart(false)}
+        cart={cart}
+        changeQuantity={changeQuantity}
+        removeItem={removeItem}
+        total={total}
+      />
+      <button
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          right: 0,
+          backgroundColor: 'orange',
+          padding: '12px 20px',
+          fontWeight: 'bold',
+          borderTopLeftRadius: '5px',
+          cursor: 'pointer',
+          border: '1px solid black'
+        }}
+        onClick={() => setShowCart(true)}
+      >
+        🛒 {total.toLocaleString()}₫
+      </button>
+    </div>
 
   );
 }
