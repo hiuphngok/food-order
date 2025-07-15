@@ -3,8 +3,9 @@ import { Row, Col } from "react-bootstrap";
 import React, { useState } from "react";
 import Content from "./components/Content/Content";
 
-import Header from "./components/Header/Header";
-import SideBar from './components/SideBar/SideBar_Staff';
+import Header from '../components/Header/Header';
+import SideBar from '../components/SideBar/SideBar_Staff';
+
 function Staff() {
 
   const [filter, setFilter] = useState(null);
