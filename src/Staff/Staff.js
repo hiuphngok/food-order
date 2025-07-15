@@ -1,27 +1,42 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Row, Col, Container } from "react-bootstrap";
-import React, { useState } from "react";
-import Content from "./components/Content/Content";
-import Header from '../components/Header/Header';
+// Staff.js
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import SideBar from '../components/SideBar/SideBar_Staff';
+import Content from './components/AllTables';
+import ActiveTables from './components/ActiveTables';
+import PreparingOrders from './components/PreparingOrders';
+import ReceivedOrders from './components/ReceivedOrders';
+import ServedOrders from './components/ServedOrders';
+import Header from '../components/Header/Header';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col } from 'react-bootstrap';
+import AllTables from './components/AllTables';
+import { BrowserRouter } from 'react-router-dom';
+
 
 function Staff() {
-
   return (
-    <div style={{ width: '100%', height: '100%' }}>
-    <Header />
+    <BrowserRouter>
+      <div style={{ width: '100%', height: '100%'}}>
+        <Header />
+        <Row style={{ margin: 0 }}>
+          <Col xs={2} className="sidebar">
+            <SideBar />
+          </Col>
 
- 
-      <Row>
-        <Col xs={2} className="sidebar">
-          <SideBar/>
-        </Col>
-        <Col xs={10} className="content">
-          <Content/>
-        </Col>
-      </Row>
-    
-  </div>
+          <Col xs={10} className="content">
+            <Routes>
+              <Route path="/" element={<AllTables />} />
+              <Route path="/active-tables" element={<ActiveTables />} />
+              <Route path="/preparing" element={<PreparingOrders />} />
+              <Route path="/received" element={<ReceivedOrders />} />
+              <Route path="/served" element={<ServedOrders />} />
+            </Routes>
+          </Col>
+        </Row>
+      </div>
+    </BrowserRouter>
+
   );
 }
 

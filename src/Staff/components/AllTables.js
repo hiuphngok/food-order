@@ -12,7 +12,7 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 
-export default function Content() {
+export default function AllTables() {
     const [orders, setOrders] = useState([]);
     const [tables, setTables] = useState([]);
     const [menu, setMenu] = useState([]);
@@ -85,18 +85,18 @@ export default function Content() {
                                 <Col xs={12} md={6} lg={6} key={o.id}>
                                     <Card style={{ marginBottom: '16px' }}>
                                         <Card.Body>
-                                            <Card.Title>Bàn: {getTableName(o.tableId)}</Card.Title>
+                                            <Card.Title>Table: {getTableName(o.tableId)}</Card.Title>
                                             <Card.Subtitle className="mb-2 text-muted">Order ID: {o.id}</Card.Subtitle>
                                             <Card.Text>
-                                                Trạng thái: <strong>{o.status}</strong><br />
-                                                Giờ đặt: {new Date(o.orderTime).toLocaleString()}
+                                                Status: <strong>{o.status}</strong><br />
+                                                Order date: {new Date(o.orderTime).toLocaleString()}
                                             </Card.Text>
                                             <Button
                                                 variant="secondary"
                                                 size="sm"
                                                 onClick={() => setSelectedOrder(o)}
                                             >
-                                                Xem chi tiết
+                                                Details
                                             </Button>
                                         </Card.Body>
                                     </Card>
@@ -141,7 +141,7 @@ export default function Content() {
 
                                         {/* Dropdown đổi status */}
                                         <td>
-                                            {item.status}
+                                            {item.status} 
                                             <DropdownButton
                                                 as={ButtonGroup}
                                                 size="sm"
@@ -157,7 +157,7 @@ export default function Content() {
 
                                         {/* Dropdown đổi thời gian */}
                                         <td>
-                                            {item.remainingMinutes}
+                                            {item.remainingMinutes} 
                                             <DropdownButton
                                                 as={ButtonGroup}
                                                 size="sm"

@@ -1,5 +1,5 @@
-import React from 'react';
 import { Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function SideBar() {
   return (
@@ -7,23 +7,26 @@ function SideBar() {
       className="d-flex flex-column text-white"
       style={{
         backgroundColor: '#1a1a1a',
-        position: 'sticky',
-        top: '56px',
-        height: 'calc(100vh - 56px)',
-        overflowY: 'auto'
+        color: 'white',
+        height: '100vh',
+        paddingTop: '56px',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '16.6666%'
       }}
     >
-      <h4 className="p-3">Menu</h4>
+      <h4 className="p-3">More</h4>
 
-      <Nav className="flex-column flex-grow-1 px-2">
-        <Nav.Link href="#" className="text-white">Item 1</Nav.Link>
-        <Nav.Link href="#" className="text-white">Item 2</Nav.Link>
-        <Nav.Link href="#" className="text-white">Item 3</Nav.Link>
-        <Nav.Link href="#" className="text-white">Item 4</Nav.Link>
-        <Nav.Link href="#" className="text-white">Item 5</Nav.Link>
-        <Nav.Link href="#" className="text-white">Item 6</Nav.Link>
-        <Nav.Link href="#" className="text-white">Item 7</Nav.Link>
+      <Nav className="flex-column flex-grow-1 px-2 ">
+        <div className="px-2 text-uppercase text-white">Manage</div>
+        <Nav.Link as={Link} to="/" className="text-white">All tables</Nav.Link>
+        <Nav.Link as={Link} to="/active-tables" className="text-white">Active tables</Nav.Link>
 
+        <div className="px-2 mt-3 text-uppercase text-white">Kitchen</div>
+        <Nav.Link as={Link} to="/preparing" className="text-white">Preparing orders</Nav.Link>
+        <Nav.Link as={Link} to="/received" className="text-white">Received orders</Nav.Link>
+        <Nav.Link as={Link} to="/served" className="text-white">Served orders</Nav.Link>
         <Nav.Link
           href="#"
           className="text-white mt-auto px-2 py-3"
