@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import CustomerScreen from './CustomerScreen';
 // import Admin_dashboard from './Admin/Admin_dashboard';
 import PreOrderPage from './PreOrderInfor';
 import './index.css'
@@ -10,9 +10,9 @@ import Staff from './Staff/Staff';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* Bỏ comment đoạn này để chạy CustomerScreen <App /> */}
+    {/* Bỏ comment đoạn này để chạy CustomerScreen <CustomerScreen /> */}
     {/* Bỏ comment đoạn này để chạy AdminDashboard <Admin_dashboard /> */}
-    <PreOrderPage />
-    {/* <Staff /> */}
+    {/* Bỏ comment đoạn này để chạy PreOrderPage <PreOrderPage /> */}
+    <Staff />
   </React.StrictMode>
 );

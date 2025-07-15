@@ -3,7 +3,7 @@ import Header from './components/Header/Header';
 import Home from './components/Home';
 import CartModal from './components/CartModal';
 
-function App() {
+function CustomerScreen() {
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
 
@@ -70,4 +70,4 @@ function App() {
   );
 }
 
-export default App;
+export default CustomerScreen;
