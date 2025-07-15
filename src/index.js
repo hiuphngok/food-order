@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import CustomerScreen from './CustomerScreen';
+import CustomerScreen from './Customer/CustomerScreen';
 // import Admin_dashboard from './Admin/Admin_dashboard';
-import PreOrderPage from './PreOrderInfor';
+import PreOrderPage from './Customer/PreOrderInfor';
 import './index.css'
 import Staff from './Staff/Staff';
 
@@ -12,7 +12,7 @@ root.render(
   <React.StrictMode>
     {/* Bỏ comment đoạn này để chạy CustomerScreen <CustomerScreen /> */}
     {/* Bỏ comment đoạn này để chạy AdminDashboard <Admin_dashboard /> */}
-    {/* Bỏ comment đoạn này để chạy PreOrderPage <PreOrderPage /> */}
-    <Staff />
+    Bỏ comment đoạn này để chạy PreOrderPage <PreOrderPage />
+    {/* <Staff /> */}
   </React.StrictMode>
 );

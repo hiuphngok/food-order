@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Row, Col } from 'react-bootstrap';
-import CardFood from './CardFood/CardFood';
-import SideBar from './SideBar/SideBar';
+import CardFood from '../components/CardFood/CardFood';
+import SideBar from '../components/SideBar/SideBar';
 
 function Home({ addToCart }) {
   const [menuItems, setMenuItems] = useState([]);

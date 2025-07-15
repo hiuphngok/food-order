@@ -1,6 +1,9 @@
 import { Nav } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function SideBar() {
+  const navigate = useNavigate();
+
   return (
     <div
       className="d-flex flex-column text-white"
@@ -24,7 +27,7 @@ function SideBar() {
         <Nav.Link href="#" className="text-white">Cate 7</Nav.Link>
 
         <Nav.Link
-          href="#"
+          onClick={() => navigate('/pre-order')}
           className="text-white mt-auto px-2 py-3"
           style={{ backgroundColor: '#111' }}
         >
