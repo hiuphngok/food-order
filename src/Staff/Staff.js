@@ -12,13 +12,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import AllTables from './components/AllTables';
 import { BrowserRouter } from 'react-router-dom';
+import Staff_Header from '../components/Header/Staff_Header';
 
 
-function Staff() {
+function Staff({ setUser }) {
   return (
-    <BrowserRouter>
       <div style={{ width: '100%', height: '100%'}}>
-        <Header />
+        <Staff_Header setUser={setUser} />
         <Row style={{ margin: 0 }}>
           <Col xs={2} className="sidebar">
             <SideBar />
@@ -35,7 +35,6 @@ function Staff() {
           </Col>
         </Row>
       </div>
-    </BrowserRouter>
 
   );
 }
