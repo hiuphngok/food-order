@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Card, Button, Badge, ListGroup, Modal, Form, Alert } from 'react-bootstrap';
 import { Clock, Edit, Trash2, ShoppingCart, CheckCircle, AlertCircle } from 'lucide-react';
+import Header from './components/Header/Header';
 
 const PreOrderPage = () => {
   // Sample data từ database
@@ -53,7 +54,7 @@ const PreOrderPage = () => {
   };
 
   const canEdit = (status) => {
-    return status === 'received' || status === 'preparing';
+    return status === 'ordered';
   };
 
   const handleEdit = (item) => {
@@ -94,7 +95,7 @@ const PreOrderPage = () => {
   };
 
   const handleCheckout = () => {
-    setAlertMessage('Order submitted successfully!');
+    setAlertMessage('Thank you! A staff member is on the way with the QR code for payment.');
     setShowAlert(true);
     setTimeout(() => setShowAlert(false), 3000);
   };
@@ -102,18 +103,16 @@ const PreOrderPage = () => {
   return (
     <Container fluid className="py-4" style={{ backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
       <Row>
-
-
+        <Header />
+      </Row>
+      <Row className='p-5'>
         <Col md={12} className="p-4">
           <h2 className="mb-4">Pre-Order Information</h2>
-
-
           {showAlert && (
             <Alert variant="success" className="mb-4">
               {alertMessage}
             </Alert>
           )}
-
           <Card className="shadow-sm">
             <Card.Header className="bg-warning text-dark">
               <h5 className="mb-0 d-flex align-items-center gap-2">
