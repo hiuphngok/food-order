@@ -5,7 +5,7 @@ import SideBar from '../components/SideBar/SideBar_Staff';
 import Content from './components/AllTables';
 import ActiveTables from './components/ActiveTables';
 import PreparingOrders from './components/PreparingOrders';
-import ReceivedOrders from './components/ReceivedOrders';
+import ReceivedOrders from './components/ServingOrders';
 import ServedOrders from './components/ServedOrders';
 import Header from '../components/Header/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';

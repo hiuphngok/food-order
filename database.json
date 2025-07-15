@@ -1,82 +1,304 @@
 {
-    "tables": [
-        {"id":1, "name": "Table 1"},
-        {"id":2, "name": "Table 2"},
-        {"id":3, "name": "Table 3"},
-        {"id":4, "name": "Table 4"},
-        {"id":5, "name": "Table 5"},
-        {"id":6, "name": "Table 6"},
-        {"id":7, "name": "Table 7"},
-        {"id":8, "name": "Table 8"},
-        {"id":9, "name": "Table 9"},
-        {"id":10, "name": "Table 10"}
-    ],
-    "categories": [
-        { "id": 1, "name": "Hotpot" },
-        { "id": 2, "name": "Meat" },
-        { "id": 3, "name": "Vegetables" },
-        { "id": 4, "name": "Drinks" },
-        { "id": 5, "name": "Seasoning" },
-        { "id": 6, "name": "Other" }
-    ],
-    "menu": [
-        { "id": 101, "name": "Spicy Hotpot Base", "price": 159000, "categoryId": 1, "serveTime": 3 },
-        { "id": 102, "name": "Mushroom Hotpot Base", "price": 149000, "categoryId": 1, "serveTime": 3 },
-        { "id": 103, "name": "Sliced Beef", "price": 99000, "categoryId": 2, "serveTime": 2 },
-        { "id": 104, "name": "Pork Belly", "price": 89000, "categoryId": 2, "serveTime": 2 },
-        { "id": 105, "name": "Shrimp", "price": 109000, "categoryId": 2, "serveTime": 3 },
-        { "id": 106, "name": "Fish Balls", "price": 49000, "categoryId": 2, "serveTime": 2 },
-        { "id": 107, "name": "Chinese Cabbage", "price": 39000, "categoryId": 3, "serveTime": 1 },
-        { "id": 108, "name": "Spinach", "price": 29000, "categoryId": 3, "serveTime": 1 },
-        { "id": 109, "name": "Lotus Root", "price": 39000, "categoryId": 3, "serveTime": 2 },
-        { "id": 110, "name": "Coca-Cola", "price": 15000, "categoryId": 4, "serveTime": 1 },
-        { "id": 111, "name": "Green Tea", "price": 12000, "categoryId": 4, "serveTime": 1 },
-        { "id": 112, "name": "Chili Sauce", "price": 10000, "categoryId": 5, "serveTime": 1 },
-        { "id": 113, "name": "Soy Sauce", "price": 8000, "categoryId": 5, "serveTime": 1 },
-        { "id": 114, "name": "Garlic", "price": 6000, "categoryId": 5, "serveTime": 1 },
-        { "id": 115, "name": "Instant Noodles", "price": 20000, "categoryId": 6, "serveTime": 2 }
-    ],
-    "orders": [
+  "tables": [
+    {
+      "id": "1",
+      "name": "Table 1"
+    },
+    {
+      "id": "2",
+      "name": "Table 2"
+    },
+    {
+      "id": "3",
+      "name": "Table 3"
+    },
+    {
+      "id": "4",
+      "name": "Table 4"
+    },
+    {
+      "id": "5",
+      "name": "Table 5"
+    },
+    {
+      "id": "6",
+      "name": "Table 6"
+    },
+    {
+      "id": "7",
+      "name": "Table 7"
+    },
+    {
+      "id": "8",
+      "name": "Table 8"
+    },
+    {
+      "id": "9",
+      "name": "Table 9"
+    },
+    {
+      "id": "10",
+      "name": "Table 10"
+    }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Hotpot"
+    },
+    {
+      "id": "2",
+      "name": "Meat"
+    },
+    {
+      "id": "3",
+      "name": "Vegetables"
+    },
+    {
+      "id": "4",
+      "name": "Drinks"
+    },
+    {
+      "id": "5",
+      "name": "Seasoning"
+    },
+    {
+      "id": "6",
+      "name": "Other"
+    }
+  ],
+  "menu": [
+    {
+      "id": "101",
+      "name": "Spicy Hotpot Base",
+      "price": 159000,
+      "categoryId": 1,
+      "serveTime": 3
+    },
+    {
+      "id": "102",
+      "name": "Mushroom Hotpot Base",
+      "price": 149000,
+      "categoryId": 1,
+      "serveTime": 3
+    },
+    {
+      "id": "103",
+      "name": "Sliced Beef",
+      "price": 99000,
+      "categoryId": 2,
+      "serveTime": 2
+    },
+    {
+      "id": "104",
+      "name": "Pork Belly",
+      "price": 89000,
+      "categoryId": 2,
+      "serveTime": 2
+    },
+    {
+      "id": "105",
+      "name": "Shrimp",
+      "price": 109000,
+      "categoryId": 2,
+      "serveTime": 3
+    },
+    {
+      "id": "106",
+      "name": "Fish Balls",
+      "price": 49000,
+      "categoryId": 2,
+      "serveTime": 2
+    },
+    {
+      "id": "107",
+      "name": "Chinese Cabbage",
+      "price": 39000,
+      "categoryId": 3,
+      "serveTime": 1
+    },
+    {
+      "id": "108",
+      "name": "Spinach",
+      "price": 29000,
+      "categoryId": 3,
+      "serveTime": 1
+    },
+    {
+      "id": "109",
+      "name": "Lotus Root",
+      "price": 39000,
+      "categoryId": 3,
+      "serveTime": 2
+    },
+    {
+      "id": "110",
+      "name": "Coca-Cola",
+      "price": 15000,
+      "categoryId": 4,
+      "serveTime": 1
+    },
+    {
+      "id": "111",
+      "name": "Green Tea",
+      "price": 12000,
+      "categoryId": 4,
+      "serveTime": 1
+    },
+    {
+      "id": "112",
+      "name": "Chili Sauce",
+      "price": 10000,
+      "categoryId": 5,
+      "serveTime": 1
+    },
+    {
+      "id": "113",
+      "name": "Soy Sauce",
+      "price": 8000,
+      "categoryId": 5,
+      "serveTime": 1
+    },
+    {
+      "id": "114",
+      "name": "Garlic",
+      "price": 6000,
+      "categoryId": 5,
+      "serveTime": 1
+    },
+    {
+      "id": "115",
+      "name": "Instant Noodles",
+      "price": 20000,
+      "categoryId": 6,
+      "serveTime": 2
+    }
+  ],
+  "orders": [
+    {
+      "id": "1",
+      "tableId": 2,
+      "items": [
         {
-            "id": 1,
-            "tableId": 2,
-            "items": [ 
-                {
-                "menuId": 103,
-                "quantity": 2,
-                "status": "preparing",
-                "remainingMinutes": 3        
-                },
-                {
-                "menuId": 111,
-                "quantity": 1,
-                "status": "received",
-                "remainingMinutes": 5
-                }
-            ],
-            "status": "pending",
-            "orderTime": "2025-07-01T19:00:00",
-            "expectedServeTime": "2025-07-01T19:15:00"
+          "menuId": 103,
+          "quantity": 2,
+          "status": "preparing",
+          "remainingMinutes": 3
+        },
+        {
+          "menuId": 111,
+          "quantity": 1,
+          "status": "received",
+          "remainingMinutes": 5
         }
-    ],
-    "roles": [
-        { "id": 1, "name": "Customer" },
-        { "id": 2, "name": "Staff" },
-        { "id": 3, "name": "Admin" }
-    ],
-    "users": [
-        { "id": 1, "username": "table01", "password": "123", "roleId": 1, "tableId": 1 },
-        { "id": 2, "username": "table02", "password": "123", "roleId": 1, "tableId": 2 },
-        { "id": 3, "username": "table03", "password": "123", "roleId": 1, "tableId": 3 },
-        { "id": 4, "username": "table04", "password": "123", "roleId": 1, "tableId": 4 },
-        { "id": 5, "username": "table05", "password": "123", "roleId": 1, "tableId": 5 },
-        { "id": 6, "username": "table06", "password": "123", "roleId": 1, "tableId": 6 },
-        { "id": 7, "username": "table07", "password": "123", "roleId": 1, "tableId": 7 },
-        { "id": 8, "username": "table08", "password": "123", "roleId": 1, "tableId": 8 },
-        { "id": 9, "username": "table09", "password": "123", "roleId": 1, "tableId": 9 },
-        { "id": 10, "username": "table10", "password": "123", "roleId": 1, "tableId": 10 },
-        { "id": 11, "username": "staff01", "password": "123", "roleId": 2 },
-        { "id": 12, "username": "staff02", "password": "123", "roleId": 2 },
-        { "id": 13, "username": "admin01", "password": "123", "roleId": 3 }
-    ]
+      ],
+      "status": "pending",
+      "orderTime": "2025-07-01T19:00:00",
+      "expectedServeTime": "2025-07-01T19:15:00"
+    }
+  ],
+  "roles": [
+    {
+      "id": "1",
+      "name": "Customer"
+    },
+    {
+      "id": "2",
+      "name": "Staff"
+    },
+    {
+      "id": "3",
+      "name": "Admin"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "table01",
+      "password": "123",
+      "roleId": 1,
+      "tableId": 1
+    },
+    {
+      "id": "2",
+      "username": "table02",
+      "password": "123",
+      "roleId": 1,
+      "tableId": 2
+    },
+    {
+      "id": "3",
+      "username": "table03",
+      "password": "123",
+      "roleId": 1,
+      "tableId": 3
+    },
+    {
+      "id": "4",
+      "username": "table04",
+      "password": "123",
+      "roleId": 1,
+      "tableId": 4
+    },
+    {
+      "id": "5",
+      "username": "table05",
+      "password": "123",
+      "roleId": 1,
+      "tableId": 5
+    },
+    {
+      "id": "6",
+      "username": "table06",
+      "password": "123",
+      "roleId": 1,
+      "tableId": 6
+    },
+    {
+      "id": "7",
+      "username": "table07",
+      "password": "123",
+      "roleId": 1,
+      "tableId": 7
+    },
+    {
+      "id": "8",
+      "username": "table08",
+      "password": "123",
+      "roleId": 1,
+      "tableId": 8
+    },
+    {
+      "id": "9",
+      "username": "table09",
+      "password": "123",
+      "roleId": 1,
+      "tableId": 9
+    },
+    {
+      "id": "10",
+      "username": "table10",
+      "password": "123",
+      "roleId": 1,
+      "tableId": 10
+    },
+    {
+      "id": "11",
+      "username": "staff01",
+      "password": "123",
+      "roleId": 2
+    },
+    {
+      "id": "12",
+      "username": "staff02",
+      "password": "123",
+      "roleId": 2
+    },
+    {
+      "id": "13",
+      "username": "admin01",
+      "password": "123",
+      "roleId": 3
+    }
+  ]
 }
