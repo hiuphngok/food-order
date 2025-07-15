@@ -4,7 +4,7 @@ import Home from './Home';
 import CartModal from '../components/CartModal';
 import { BrowserRouter } from 'react-router-dom';
 
-function CustomerScreen() {
+function CustomerScreen({ setUser }) {
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
 
@@ -40,7 +40,7 @@ function CustomerScreen() {
 
   return (
     <div>
-      <Header />
+      <Header setUser={setUser} />
       <Home addToCart={addToCart} />
       {/* <TotalAmount /> */}
       <CartModal
