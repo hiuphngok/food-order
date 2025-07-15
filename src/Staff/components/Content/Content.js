@@ -1,27 +1,188 @@
-import React, { useState } from 'react';
-import TableList from './TableList';
-import OrderPanel from './OrderPanel';
-import { tables as dummyTables } from '../../data/dummyTables';
-import { Col, Row } from 'react-bootstrap';
+import { useEffect, useState } from "react";
+import {
+    Container,
+    Row,
+    Col,
+    Table,
+    Form,
+    Button,
+    DropdownButton,
+    Dropdown,
+    ButtonGroup, Card
+} from "react-bootstrap";
+import axios from "axios";
 
+export default function Content() {
+    const [orders, setOrders] = useState([]);
+    const [tables, setTables] = useState([]);
+    const [menu, setMenu] = useState([]);
+    const [selectedOrder, setSelectedOrder] = useState(null);
+    const [search, setSearch] = useState("");
 
-const Content = ({ filter }) => {
-    const [selectedTable, setSelectedTable] = useState(null);
+    useEffect(() => {
+        axios.get("http://localhost:9999/orders").then((res) => setOrders(res.data));
+        axios.get("http://localhost:9999/tables").then((res) => setTables(res.data));
+        axios.get("http://localhost:9999/menu").then((res) => setMenu(res.data));
+    }, []);
 
-    const filteredTables = dummyTables.filter(
-        (t) => !filter || t.status === filter
-    );
+    const getTableName = (tableId) =>
+        tables.find((t) => Number(t.id) === Number(tableId))?.name || "Unknown";
+
+    const getMenuName = (menuId) =>
+        menu.find((m) => Number(m.id) === Number(menuId))?.name || "Unknown";
+
+    const updateOrderItem = (index, field, value) => {
+        if (!selectedOrder) return;
+
+        const updatedItems = [...selectedOrder.items];
+        updatedItems[index] = {
+            ...updatedItems[index],
+            [field]: field === "remainingMinutes" || field === "quantity"
+                ? Number(value) : value
+        };
+
+        const updatedOrder = {
+            ...selectedOrder,
+            items: updatedItems
+        };
+
+        // Gửi PUT lên API
+        axios
+            .put(`http://localhost:9999/orders/${updatedOrder.id}`, updatedOrder)
+            .then(() => {
+                setSelectedOrder(updatedOrder); // cập nhật lại local state
+                setOrders((prev) =>
+                    prev.map((order) => (order.id === updatedOrder.id ? updatedOrder : order))
+                );
+                console.log("Updated order item successfully.");
+            })
+            .catch((err) => {
+                console.error("Failed to update item:", err);
+            });
+    };
 
     return (
-        <Row>
-            <Col xs={6}>
-                <TableList tables={filteredTables} onSelectTable={setSelectedTable} />
-            </Col>
-            <Col xs={6}>
-                <OrderPanel table={selectedTable} />
-            </Col>
-        </Row>
-    );
-};
+        <Container style={{ position: "fixed", top: "56px" }}>
+            <Row>
+                <Col xs={6}>
+                    <Form className="mb-3">
+                        <Form.Group>
+                            <Form.Control
+                                type="text"
+                                placeholder="Search by table name..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                        </Form.Group>
+                    </Form>
 
-export default Content;
+                    <Row>
+                        {orders
+                            .filter((o) =>
+                                getTableName(o.tableId).toLowerCase().includes(search.toLowerCase())
+                            )
+                            .map((o) => (
+                                <Col xs={12} md={6} lg={6} key={o.id}>
+                                    <Card style={{ marginBottom: '16px' }}>
+                                        <Card.Body>
+                                            <Card.Title>Bàn: {getTableName(o.tableId)}</Card.Title>
+                                            <Card.Subtitle className="mb-2 text-muted">Order ID: {o.id}</Card.Subtitle>
+                                            <Card.Text>
+                                                Trạng thái: <strong>{o.status}</strong><br />
+                                                Giờ đặt: {new Date(o.orderTime).toLocaleString()}
+                                            </Card.Text>
+                                            <Button
+                                                variant="secondary"
+                                                size="sm"
+                                                onClick={() => setSelectedOrder(o)}
+                                            >
+                                                Xem chi tiết
+                                            </Button>
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            ))}
+                    </Row>
+
+                </Col>
+
+                <Col xs={6}>
+                    <h6>Order Details</h6>
+                    {selectedOrder ? (
+                        <Table bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
+                                    <th>Status</th>
+                                    <th>Remaining (min)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {selectedOrder.items.map((item, idx) => (
+                                    <tr key={idx}>
+                                        <td>{getMenuName(item.menuId)}</td>
+                                        <td><Button
+                                            variant="outline-secondary"
+                                            size="sm"
+                                            onClick={() => updateOrderItem(idx, "quantity", item.quantity - 1)}
+                                            disabled={item.quantity <= 1}
+                                        >
+                                            -
+                                        </Button>{" "}
+                                            {item.quantity}{" "}
+                                            <Button
+                                                variant="outline-secondary"
+                                                size="sm"
+                                                onClick={() => updateOrderItem(idx, "quantity", item.quantity + 1)}
+                                            >
+                                                +
+                                            </Button></td>
+
+                                        {/* Dropdown đổi status */}
+                                        <td>
+                                            {item.status}
+                                            <DropdownButton
+                                                as={ButtonGroup}
+                                                size="sm"
+                                                variant="secondary"
+                                                title="Change Status"
+                                                onSelect={(status) => updateOrderItem(idx, "status", status)}
+                                            >
+                                                <Dropdown.Item eventKey="preparing">Preparing</Dropdown.Item>
+                                                <Dropdown.Item eventKey="received">Received</Dropdown.Item>
+                                                <Dropdown.Item eventKey="served">Served</Dropdown.Item>
+                                            </DropdownButton>
+                                        </td>
+
+                                        {/* Dropdown đổi thời gian */}
+                                        <td>
+                                            {item.remainingMinutes}
+                                            <DropdownButton
+                                                as={ButtonGroup}
+                                                size="sm"
+                                                variant="info"
+                                                title="Change Time"
+                                                onSelect={(val) =>
+                                                    updateOrderItem(idx, "remainingMinutes", val)
+                                                }
+                                            >
+                                                {[3, 5, 10, 15, 20, 30].map((min) => (
+                                                    <Dropdown.Item key={min} eventKey={min}>
+                                                        {min} min
+                                                    </Dropdown.Item>
+                                                ))}
+                                            </DropdownButton>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    ) : (
+                        <p>Please select an order to see details.</p>
+                    )}
+                </Col>
+            </Row>
+        </Container>
+    );
+}
