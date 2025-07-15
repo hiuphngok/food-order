@@ -5,8 +5,15 @@ import './index.css'
 import { useNavigate } from 'react-router-dom';
 import { hover } from '@testing-library/user-event/dist/hover';
 
-function Header() {
+function Header({ setUser }) {
   const navigate = useNavigate()
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    navigate("/login");
+  };
 
   return (
     <Navbar expand="lg" variant="dark" fixed="top" style={{ backgroundColor: '#0a0a0a' }}>
@@ -17,27 +24,42 @@ function Header() {
             <Navbar.Brand style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>Food Order</Navbar.Brand>
           </Col>
 
-          <Col md={6}>
-            <Form className="d-flex">
-              <Form.Control
-                type="text"
-                placeholder="Search"
-                className="me-2 custom-input text-white"
-                style={{ minWidth: '200px', backgroundColor: '#101012', border: 'none' }}
-              />
-              <Button type="submit" style={{ backgroundColor: '#101000', border: 'none' }}>
-                Search
-              </Button>
-            </Form>
-          </Col>
+          {user?.roleId === 1 && (
+            <Col md={6}>
+              <Form className="d-flex">
+                <Form.Control
+                  type="text"
+                  placeholder="Search"
+                  className="me-2 text-white"
+                  style={{ minWidth: '200px', backgroundColor: '#101012', border: 'none' }}
+                />
+                <Button type="submit" style={{ backgroundColor: '#101000', border: 'none' }}>
+                  Search
+                </Button>
+              </Form>
+            </Col>
+          )}
 
 
-          <Col md={3} className="d-flex justify-content-end">
+          <Col md={user?.roleId === 1 ? 3 : 9} className="d-flex justify-content-end">
             <Nav>
-              <Nav.Link href="#login" className="me-3 text-white">
-                Login
-              </Nav.Link>
-              <Nav.Link href="#register" className='text-white'>Register</Nav.Link>
+              {user ? (
+                <>
+                  <Nav.Link className="text-white me-3" disabled>
+                    Hello, {user.username}
+                  </Nav.Link>
+                  <Button variant="outline-light" size="sm" onClick={handleLogout}>
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Nav.Link onClick={() => navigate("/login")} className="text-white me-3">
+                    Login
+                  </Nav.Link>
+                  <Nav.Link className="text-white">Register</Nav.Link>
+                </>
+              )}
             </Nav>
           </Col>
         </Row>
