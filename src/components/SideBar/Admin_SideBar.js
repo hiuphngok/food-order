@@ -12,21 +12,28 @@ export default function Admin_SideBar() {
           to="menu"
           className="sidebar-link"
         >
-          Quản lý Menu
+          Menu Manager
         </Nav.Link>
         <Nav.Link
           as={NavLink}
           to="users"
           className="sidebar-link"
         >
-          Quản lý Tài khoản
+          Account Manager
         </Nav.Link>
         <Nav.Link
           as={NavLink}
           to="orders"
           className="sidebar-link"
         >
-          Xem Đơn hàng
+          Orders
+        </Nav.Link>
+        <Nav.Link
+          as={NavLink}
+          to="tables"
+          className="sidebar-link"
+        >
+          Tables Manager
         </Nav.Link>
       </Nav>
     </div>
