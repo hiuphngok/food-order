@@ -9,6 +9,8 @@ export default function AccountManager() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [search, setSearch] = useState("");
   const [isAdding, setIsAdding] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
 
   useEffect(() => {
     axios.get("http://localhost:9999/users").then((result) => setUsers(result.data));
@@ -57,26 +59,35 @@ export default function AccountManager() {
     });
   };
 
+  const usedTableIds = users
+      .filter(u => u.roleId === 1 && u.tableId !== undefined)
+      .map(u => Number(u.tableId));
+
+  const availableTables = tables.filter(t => !usedTableIds.includes(Number(t.id)));
+
   return (
     <>
-      <Button
-        className="mb-3"
-        onClick={() => {
-          setSelectedUser({
-            username: "",
-            password: "",
-            roleId: roles[0]?.id || 1,
-            tableId: undefined
-          });
-          setIsAdding(true);
-        }}
-      >
-        Add Account
-      </Button>
+      
 
       <Container>
         <Row>
-          <Col xs={6}>
+          <Col xs={2}>
+            <Button
+              className="mb-3"
+              onClick={() => {
+                setSelectedUser({
+                  username: "",
+                  password: "",
+                  roleId: roles[0]?.id || 1,
+                  tableId: undefined
+                });
+                setIsAdding(true);
+              }}
+            >
+              Add Account
+            </Button>
+          </Col>
+          <Col xs={5}>
             <Form className="mb-3">
               <Form.Group>
                 <Form.Control
@@ -141,7 +152,7 @@ export default function AccountManager() {
             </Table>
           </Col>
 
-          <Col xs={6}>
+          <Col xs={5}>
             <h6>Account Details</h6>
             {selectedUser ? (
               <Form
@@ -162,13 +173,23 @@ export default function AccountManager() {
 
                 <Form.Group className="mb-3">
                   <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    value={selectedUser.password}
-                    onChange={(e) =>
-                      setSelectedUser({ ...selectedUser, password: e.target.value })
-                    }
-                  />
+                  <div style={{ display: "flex", alignItems: "center" }}>
+                    <Form.Control
+                      type={showPassword ? "text" : "password"}
+                      value={selectedUser.password}
+                      onChange={(e) =>
+                        setSelectedUser({ ...selectedUser, password: e.target.value })
+                      }
+                    />
+                    <Button
+                      variant="outline-dark"
+                      size="sm"
+                      onClick={() => setShowPassword(!showPassword)}
+                      style={{ marginLeft: "8px" }}
+                    >
+                      {showPassword ? "Hide" : "Show"}
+                    </Button>
+                  </div>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
@@ -194,21 +215,51 @@ export default function AccountManager() {
                 {selectedUser.roleId === 1 && (
                   <Form.Group className="mb-3">
                     <Form.Label>Table</Form.Label>
-                    <Form.Select
-                      value={selectedUser.tableId || ""}
-                      onChange={(e) =>
-                        setSelectedUser({
-                          ...selectedUser,
-                          tableId: Number(e.target.value)
-                        })
-                      }
-                    >
-                      {tables.map((t) => (
-                        <option key={t.id} value={t.id}>
-                          {t.name}
-                        </option>
-                      ))}
-                    </Form.Select>
+
+                    {isAdding ? (
+                      availableTables.length === 0 ? (
+                        <p className="text-danger">Tất cả các bàn đã có tài khoản.</p>
+                      ) : (
+                        <Form.Select
+                          value={selectedUser.tableId || ""}
+                          onChange={(e) =>
+                            setSelectedUser({
+                              ...selectedUser,
+                              tableId: Number(e.target.value),
+                            })
+                          }
+                        >
+                          {availableTables.map((t) => (
+                            <option key={t.id} value={t.id}>
+                              {t.name}
+                            </option>
+                          ))}
+                        </Form.Select>
+                      )
+                    ) : (
+                      // <Form.Select
+                      //   value={selectedUser.tableId || ""}
+                      //   onChange={(e) =>
+                      //     setSelectedUser({
+                      //       ...selectedUser,
+                      //       tableId: Number(e.target.value),
+                      //     })
+                      //   }
+                      // >
+                      //   {tables.map((t) => (
+                      //     <option key={t.id} value={t.id}>
+                      //       {t.name}
+                      //     </option>
+                      //   ))}
+                      // </Form.Select>
+                      <Form.Control
+                        value={
+                          tables?.find((t) => t.id == selectedUser.tableId)?.name || "-"
+                        }
+                        readOnly
+                        style={{ backgroundColor: "#e9ecef" }}
+                      />
+                    )}
                   </Form.Group>
                 )}
 
