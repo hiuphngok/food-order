@@ -9,6 +9,7 @@ import OrderManager from "./Admin/OrderManager";
 import AccountManager from "./Admin/AccountManager";
 import MenuManager from "./Admin/MenuManager";
 import DashBoard from "./Admin/DashBoard";
+import TableManager from "./Admin/TableManager";
 
 export default function App(){
     const [user, setUser] = useState(null);
@@ -57,6 +58,7 @@ export default function App(){
                     <Route path="menu" element={<MenuManager />} />
                     <Route path="orders" element={<OrderManager />} />
                     <Route path="users" element={<AccountManager />} />
+                    <Route path="tables" element={<TableManager />} />
                 </Route>
                 <Route path="*" element={<Navigate to="/admin" />} />
                 </>
