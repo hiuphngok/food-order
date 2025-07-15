@@ -1,7 +1,52 @@
 import React from 'react';
 import { Modal, Button, ListGroup } from 'react-bootstrap';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 function CartModal({ show, onClose, cart, changeQuantity, removeItem, total }) {
+  const [menuData, setMenuData] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:9999/menu")
+      .then(res => setMenuData(res.data))
+      .catch(err => console.error("Loading failed:", err));
+  }, []);
+
+  const getServeTime = (menuId) => {
+    const item = menuData.find(m => m.id === menuId);
+    return item?.serveTime || 2; // fallback nếu không có
+  };
+
+  const handleSubmitOrder = () => {
+    const tableId = 2; // sau này có thể lấy từ user login
+
+    const itemsWithServeTime = cart.map(item => ({
+      menuId: item.id,
+      quantity: item.quantity,
+      status: 'ordered',
+      remainingMinutes: getServeTime(item.id)
+    }));
+
+    const newOrder = {
+      tableId,
+      items: itemsWithServeTime,
+      status: 'ordered',
+      orderTime: new Date().toISOString(),
+      expectedServeTime: new Date(Date.now() + 15 * 60000).toISOString()
+    };
+
+    axios.post("http://localhost:9999/orders", newOrder)
+      .then(() => {
+        alert("Order submitted successfully!");
+        onClose();
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Failed to submit order. Please try again.");
+      });
+  };
+
+
   return (
     <Modal show={show} onHide={onClose}>
       <Modal.Header closeButton>
@@ -32,7 +77,7 @@ function CartModal({ show, onClose, cart, changeQuantity, removeItem, total }) {
       </Modal.Body>
       <Modal.Footer>
         <strong>Total: {total.toLocaleString()}₫</strong>
-        <Button variant="success" onClick={() => alert('Phần này t chưa làm nhé')}>
+        <Button variant="success" onClick={handleSubmitOrder}>
           Submit Order
         </Button>
       </Modal.Footer>
