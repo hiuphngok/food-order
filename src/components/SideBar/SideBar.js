@@ -15,13 +15,13 @@ function SideBar() {
       <h4 className="p-3">Menu</h4>
 
       <Nav className="flex-column flex-grow-1 px-2">
-        <Nav.Link href="#" className="text-white">Item 1</Nav.Link>
-        <Nav.Link href="#" className="text-white">Item 2</Nav.Link>
-        <Nav.Link href="#" className="text-white">Item 3</Nav.Link>
-        <Nav.Link href="#" className="text-white">Item 4</Nav.Link>
-        <Nav.Link href="#" className="text-white">Item 5</Nav.Link>
-        <Nav.Link href="#" className="text-white">Item 6</Nav.Link>
-        <Nav.Link href="#" className="text-white">Item 7</Nav.Link>
+        <Nav.Link href="#" className="text-white">Cate 1</Nav.Link>
+        <Nav.Link href="#" className="text-white">Cate 2</Nav.Link>
+        <Nav.Link href="#" className="text-white">Cate 3</Nav.Link>
+        <Nav.Link href="#" className="text-white">Cate 4</Nav.Link>
+        <Nav.Link href="#" className="text-white">Cate 5</Nav.Link>
+        <Nav.Link href="#" className="text-white">Cate 6</Nav.Link>
+        <Nav.Link href="#" className="text-white">Cate 7</Nav.Link>
 
         <Nav.Link
           href="#"

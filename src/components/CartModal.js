@@ -32,8 +32,8 @@ function CartModal({ show, onClose, cart, changeQuantity, removeItem, total }) {
       </Modal.Body>
       <Modal.Footer>
         <strong>Total: {total.toLocaleString()}₫</strong>
-        <Button variant="success" onClick={() => alert('Phần checkout t chưa làm nhé')}>
-          Checkout
+        <Button variant="success" onClick={() => alert('Phần này t chưa làm nhé')}>
+          Submit Order
         </Button>
       </Modal.Footer>
     </Modal>
