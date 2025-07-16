@@ -11,6 +11,8 @@ import MenuManager from "./Admin/MenuManager";
 import DashBoard from "./Admin/DashBoard";
 import PreOrderPage from "./Customer/PreOrderInfor";
 import TableManager from "./Admin/TableManager";
+import ActiveTables from "./Staff/components/ActiveTables";
+import AllTables from "./Staff/components/AllTables";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -49,8 +51,11 @@ export default function App() {
       )}
       {user.roleId === 2 && (
         <>
-          <Route path="/staff" element={<Staff setUser={setUser} />} />
-          <Route path="*" element={<Navigate to="/staff" />} />
+          <Route path="/staff" element={<Staff setUser={setUser} />} >
+            <Route index element={<AllTables />} />
+            <Route path="active-tables" element={<ActiveTables />} />
+            <Route path="*" element={<Navigate to="/staff" />} />
+          </Route>
         </>
       )}
       {user.roleId === 3 && (
