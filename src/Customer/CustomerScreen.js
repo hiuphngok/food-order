@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Header from '../components/Header/Header';
 import Home from './Home';
 import CartModal from '../components/CartModal';
-import { BrowserRouter } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import { Bell, ShoppingCart } from 'lucide-react';
 
 function CustomerScreen({ setUser }) {
   const [cart, setCart] = useState([]);
@@ -51,6 +52,22 @@ function CustomerScreen({ setUser }) {
         removeItem={removeItem}
         total={total}
       />
+      <Button
+        title='Call Staff'
+        style={{
+          position: 'fixed',
+          bottom: 60,
+          right: 0,
+          backgroundColor: '#007bff',
+          padding: '12px 20px',
+          fontWeight: 'bold',
+          borderRadius: '50%',
+          cursor: 'pointer'
+        }}
+      // onClick={handleCallStaff}
+      >
+        <Bell />
+      </Button>
       <button
         style={{
           position: 'fixed',
@@ -61,11 +78,11 @@ function CustomerScreen({ setUser }) {
           fontWeight: 'bold',
           borderTopLeftRadius: '5px',
           cursor: 'pointer',
-          border: '1px solid black'
+          border: 'none'
         }}
         onClick={() => setShowCart(true)}
       >
-        🛒 {total.toLocaleString()}₫
+        <ShoppingCart /> {total.toLocaleString()}₫
       </button>
     </div>
 
