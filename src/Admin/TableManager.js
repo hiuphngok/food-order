@@ -4,6 +4,8 @@ import axios from "axios";
 
 export default function TableManager() {
   const [tables, setTables] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [selectedTable, setSelectedTable] = useState(null);
   const [isAdding, setIsAdding] = useState(false);
 
@@ -11,6 +13,13 @@ export default function TableManager() {
     axios.get("http://localhost:9999/tables")
       .then((res) => setTables(res.data))
       .catch((err) => console.error(err));
+
+    axios.get("http://localhost:9999/users")
+      .then((res) => setUsers(res.data))
+      .catch((err) => console.error(err));
+
+    axios.get("http://localhost:9999/orders")
+      .then(res => setOrders(res.data));
   }, []);
 
   const handleSubmit = (e) => {
@@ -64,8 +73,10 @@ export default function TableManager() {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Tên bàn</th>
-                <th>Chi tiết</th>
+                <th>Table Name</th>
+                <th>In Use</th>
+                <th>Account</th>
+                <th>Details</th>
               </tr>
             </thead>
             <tbody>
@@ -78,6 +89,20 @@ export default function TableManager() {
                 >
                   <td>{t.id}</td>
                   <td>{t.name}</td>
+                  <td>
+                    {orders.some(o => o.tableId == t.id) ? (
+                      <span className="badge bg-success">Active</span>
+                    ) : (
+                      <span className="badge bg-danger">Inactive</span>
+                    )}
+                  </td>
+                  <td>
+                    {users.some(u => u.roleId == 1 && u.tableId == t.id) ? (
+                      <span className="text-success">Registered</span>
+                    ) : (
+                      <span className="text-muted">None</span>
+                    )}
+                  </td>
                   <td>
                     <Button
                       size="sm"
