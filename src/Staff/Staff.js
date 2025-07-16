@@ -13,6 +13,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import AllTables from './components/AllTables';
 import { BrowserRouter } from 'react-router-dom';
 import Staff_Header from '../components/Header/Staff_Header';
+import { Outlet } from 'react-router-dom';
+
 
 
 function Staff({ setUser }) {
@@ -25,13 +27,7 @@ function Staff({ setUser }) {
           </Col>
 
           <Col xs={10} className="content">
-            <Routes>
-              <Route path="/" element={<AllTables />} />
-              <Route path="/active-tables" element={<ActiveTables />} />
-              <Route path="/preparing" element={<PreparingOrders />} />
-              <Route path="/received" element={<ReceivedOrders />} />
-              <Route path="/served" element={<ServedOrders />} />
-            </Routes>
+            <Outlet />
           </Col>
         </Row>
       </div>
