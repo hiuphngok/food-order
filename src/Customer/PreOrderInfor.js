@@ -104,7 +104,6 @@ const PreOrderPage = () => {
   const handleCheckout = () => {
     setAlertMessage('Thank you! A staff member is on the way with the QR code for payment.');
     setShowAlert(true);
-    setTimeout(() => setShowAlert(false), 3000);
   };
 
   return (
