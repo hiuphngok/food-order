@@ -1,8 +1,17 @@
 import { Nav } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 function SideBar() {
+  const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch('http://localhost:9999/categories')
+      .then((res) => res.json())
+      .then((data) => setCategories(data))
+      .catch((err) => console.error('Failed to fetch categories:', err));
+  }, []);
 
   return (
     <div
@@ -18,13 +27,15 @@ function SideBar() {
       <h4 className="p-3">Menu</h4>
 
       <Nav className="flex-column flex-grow-1 px-2">
-        <Nav.Link href="#" className="text-white">Cate 1</Nav.Link>
-        <Nav.Link href="#" className="text-white">Cate 2</Nav.Link>
-        <Nav.Link href="#" className="text-white">Cate 3</Nav.Link>
-        <Nav.Link href="#" className="text-white">Cate 4</Nav.Link>
-        <Nav.Link href="#" className="text-white">Cate 5</Nav.Link>
-        <Nav.Link href="#" className="text-white">Cate 6</Nav.Link>
-        <Nav.Link href="#" className="text-white">Cate 7</Nav.Link>
+        {categories.map((cate) => (
+          <Nav.Link
+            key={cate.id}
+            href="#"
+            className="text-white"
+          >
+            {cate.name}
+          </Nav.Link>
+        ))}
 
         <Nav.Link
           onClick={() => navigate('/pre-order')}
