@@ -101,9 +101,24 @@ const PreOrderPage = () => {
 
   const formatPrice = (price) => new Intl.NumberFormat('vi-VN').format(price) + 'đ';
 
+  // Handle checkout action, post staffCalls to database
   const handleCheckout = () => {
-    setAlertMessage('Thank you! A staff member is on the way with the QR code for payment.');
-    setShowAlert(true);
+    const requestData = {
+      tableId: tableId,
+      time: new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Ho_Chi_Minh' }),
+      status: 'pending'
+    };
+
+    axios.post('http://localhost:9999/staffCalls', requestData)
+      .then(() => {
+        setAlertMessage('Thank you! A staff member is on the way with the QR code for payment.');
+        setShowAlert(true);
+      })
+      .catch(err => {
+        console.error('Checkout failed:', err);
+        setAlertMessage('Failed to checkout. Please try again.');
+        setShowAlert(true);
+      });
   };
 
   return (

@@ -14,7 +14,7 @@ function CustomerScreen({ setUser }) {
   const handleCallStaff = () => {
     const requestData = {
       tableId: JSON.parse(localStorage.getItem('user')).tableId,
-      time: new Date().toISOString(),
+      time: new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Ho_Chi_Minh' }),
       status: 'pending'
     };
 

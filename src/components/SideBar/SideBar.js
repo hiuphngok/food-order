@@ -18,7 +18,7 @@ function SideBar() {
       className="d-flex flex-column text-white"
       style={{
         backgroundColor: '#1a1a1a',
-        position: 'sticky',
+        position: 'fixed',
         top: '56px',
         height: 'calc(100vh - 56px)',
         overflowY: 'auto'
@@ -45,7 +45,7 @@ function SideBar() {
           Get the pre-order information
         </Nav.Link>
       </Nav>
-    </div>
+    </div >
   );
 }
 

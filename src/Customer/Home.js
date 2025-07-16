@@ -17,10 +17,10 @@ function Home({ addToCart }) {
 
   return (
     <Row className="gx-0" style={{ paddingTop: '56px', minHeight: '100vh' }}>
-      <Col lg={2} md={3} className="bg-light border-end shadow-sm">
+      <Col lg={2} md={3}>
         <SideBar />
       </Col>
-      <Col lg={10} md={9}>
+      <Col lg={10} md={9} gap="4">
         <Container fluid className="py-4 px-4">
           {loading ? (
             <div className="d-flex justify-content-center align-items-center" style={{ height: '50vh' }}>
