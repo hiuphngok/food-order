@@ -145,7 +145,19 @@ const PreOrderPage = () => {
               ) : (
                 <ListGroup variant="flush">
                   {orderItems.map((item, index) => (
-                    <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center py-3">
+                    <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center py-3 gap-3">
+                      <img
+                        src={`/images/${menu.find(m => m.id == item.menuId)?.image || 'default.jpg'}`}
+                        alt={getItemName(item.menuId)}
+                        style={{
+                          width: '80px',
+                          height: '80px',
+                          objectFit: 'cover',
+                          borderRadius: '8px',
+                          flexShrink: 0
+                        }}
+                      />
+
                       <div className="flex-grow-1">
                         <div className="d-flex justify-content-between align-items-start mb-2">
                           <h6 className="mb-1">{getItemName(item.menuId)}</h6>
