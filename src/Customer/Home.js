@@ -7,6 +7,7 @@ import SideBar from '../components/SideBar/SideBar';
 function Home({ addToCart, searchTerm }) { // vừa bổ sung searchTerm
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     axios.get('http://localhost:9999/menu')
@@ -15,14 +16,17 @@ function Home({ addToCart, searchTerm }) { // vừa bổ sung searchTerm
       .finally(() => setLoading(false));
   }, []);
 
-  // Lọc menuItems dựa trên searchTerm ( vừa bổ sung )
-  const filteredMenuItems = menuItems.filter(item => item.name?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Lọc các mục thực đơn theo từ khóa tìm kiếm và danh mục đã chọn
+  const filteredMenuItems = menuItems.filter(item => {
+    const matchSearch = item.name?.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchCategory = selectedCategory === null || item.categoryId === selectedCategory;
+    return matchSearch && matchCategory;
+  });
 
   return (
     <Row className="gx-0" style={{ paddingTop: '56px', minHeight: '100vh' }}>
       <Col lg={2} md={3}>
-        <SideBar />
+        <SideBar onCategorySelect={setSelectedCategory} />
       </Col>
       <Col lg={10} md={9} gap="4">
         <Container fluid className="py-4 px-4">
