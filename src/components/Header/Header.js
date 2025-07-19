@@ -5,7 +5,7 @@ import './index.css'
 import { useNavigate } from 'react-router-dom';
 import { hover } from '@testing-library/user-event/dist/hover';
 
-function Header({ setUser }) {
+function Header({ setUser, setSearchTerm }) { // vừa bổ sung setSearchTerm
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -13,6 +13,10 @@ function Header({ setUser }) {
     localStorage.removeItem("user");
     setUser(null);
     navigate("/login");
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value); // Cập nhật searchTerm ngay lập tức khi nhập
   };
 
   return (
@@ -30,12 +34,10 @@ function Header({ setUser }) {
                 <Form.Control
                   type="text"
                   placeholder="Search"
-                  className="me-2 text-white"
+                  className="me-2 text-white custom-input"
                   style={{ minWidth: '200px', backgroundColor: '#101012', border: 'none' }}
+                  onChange={handleSearchChange}
                 />
-                <Button type="submit" style={{ backgroundColor: '#101000', border: 'none' }}>
-                  Search
-                </Button>
               </Form>
             </Col>
           )}

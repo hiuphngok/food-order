@@ -4,7 +4,7 @@ import { Row, Col, Spinner, Alert, Container } from 'react-bootstrap';
 import CardFood from '../components/CardFood/CardFood';
 import SideBar from '../components/SideBar/SideBar';
 
-function Home({ addToCart }) {
+function Home({ addToCart, searchTerm }) { // vừa bổ sung searchTerm
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -14,6 +14,10 @@ function Home({ addToCart }) {
       .catch(err => console.error(err))
       .finally(() => setLoading(false));
   }, []);
+
+  // Lọc menuItems dựa trên searchTerm ( vừa bổ sung )
+  const filteredMenuItems = menuItems.filter(item => item.name?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <Row className="gx-0" style={{ paddingTop: '56px', minHeight: '100vh' }}>
@@ -26,11 +30,11 @@ function Home({ addToCart }) {
             <div className="d-flex justify-content-center align-items-center" style={{ height: '50vh' }}>
               <Spinner animation="border" variant="primary" />
             </div>
-          ) : menuItems.length === 0 ? (
+          ) : filteredMenuItems.length === 0 ? (
             <Alert variant="warning">No menu items found.</Alert>
           ) : (
             <Row className="gx-4 gy-4">
-              {menuItems.map(item => (
+              {filteredMenuItems.map(item => (
                 <Col key={item.id} lg={6} md={6}>
                   <CardFood
                     id={item.id}
