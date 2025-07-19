@@ -20,13 +20,10 @@ function SideBar() {
 
       <Nav className="flex-column flex-grow-1 px-2 ">
         <div className="px-2 text-uppercase text-white">Manage</div>
-        <Nav.Link as={Link} to="staff" className="text-white">All tables</Nav.Link>
-        <Nav.Link as={Link} to="active-tables" className="text-white">Active tables</Nav.Link>
+        <Nav.Link as={Link} to="all" className="text-white">All tables</Nav.Link>
+        <Nav.Link as={Link} to="active" className="text-white">Active tables</Nav.Link>
 
-        <div className="px-2 mt-3 text-uppercase text-white">Kitchen</div>
-        <Nav.Link as={Link} to="preparing" className="text-white">Preparing orders</Nav.Link>
-        <Nav.Link as={Link} to="received" className="text-white">Received orders</Nav.Link>
-        <Nav.Link as={Link} to="served" className="text-white">Served orders</Nav.Link>
+        <div className="px-2 mt-3 text-uppercase text-white">Checkout</div>
         <Nav.Link
           href="#"
           className="text-white mt-auto px-2 py-3"

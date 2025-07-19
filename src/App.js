@@ -51,9 +51,11 @@ export default function App() {
       )}
       {user.roleId === 2 && (
         <>
-          <Route path="/staff" element={<Staff setUser={setUser} />} />
+          <Route path="/staff" element={<Staff setUser={setUser}/>} >
           <Route index element={<AllTables />} />
-          <Route path="active-tables" element={<ActiveTables />} />
+          <Route path="all" element={<AllTables />} />
+          <Route path="active" element={<ActiveTables />} />
+          </Route>
           <Route path="*" element={<Navigate to="/staff" />} />
         </>
       )}

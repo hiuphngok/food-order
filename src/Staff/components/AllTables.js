@@ -11,7 +11,8 @@ import {
     ButtonGroup, Card
 } from "react-bootstrap";
 import axios from "axios";
-import { tab } from "@testing-library/user-event/dist/tab";
+import StaffCall from "./StaffCall";
+
 
 export default function AllTables() {
     const [orders, setOrders] = useState([]);
@@ -80,6 +81,7 @@ export default function AllTables() {
             });
     };
 
+    const filteredSearchTablesNames = setSearch ? tables.filter(tables => tables.name.toLowerCase().includes(search.toLowerCase())) : tables;
 
     const getOrder = (tableId) =>
         orders.find((o) => Number(o.tableId) === Number(tableId)) || null;
@@ -119,22 +121,24 @@ export default function AllTables() {
 
     return (
         <Container style={{ position: "fixed", top: "56px" }}>
-            <Row>
-                <Form className="mb-3">
-                    <Form.Group>
-                        <Form.Control
-                            type="text"
-                            placeholder="Search by table name..."
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                        />
-                    </Form.Group>
-                </Form>
-                <Col xs={6}>
+                <h1 className="text-center">All Tables</h1>
+                <div className="text-center">
+                    <Form className="mb-3">
+                        <Form.Group>
+                            <Form.Control
+                                type="text"
+                                placeholder="Search by table name..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
+                        </Form.Group>
+                    </Form>
+                </div>
+            <Row className="mt-4">
+                <Col xs={12} md={8}>
 
                     <Row>
-                        {tables
-                            .map((table) => (
+                        {filteredSearchTablesNames.map((table) => (
                                 <Col xs={12} md={6} lg={6} key={table.id}>
                                     <Card style={{ marginBottom: '16px' }}>
                                         <Card.Body>
@@ -158,11 +162,11 @@ export default function AllTables() {
                                                 </>
                                             ) : (
                                                 <>
-                                                   <Card.Subtitle className="mb-2 text-muted">
+                                                    <Card.Subtitle className="mb-2 text-muted">
                                                         No active order
                                                     </Card.Subtitle>
                                                     <Card.Text>
-                                                        Click to create a new order for this table.                                                        
+                                                        Click to create a new order for this table.
                                                     </Card.Text>
                                                     <Button
                                                         variant="secondary"
@@ -181,11 +185,11 @@ export default function AllTables() {
 
                 </Col>
 
-                <Col xs={6}>
-                    <h6>Order Details</h6>
+                <Col xs={12} md={4}>
+                <div className="border p-3"><h6>Order Details</h6>
                     {selectedOrder ? (
                         <>
-                            <Table bordered hover>
+                            <Table>
                                 <thead>
                                     <tr>
                                         <th>Item</th>
@@ -301,8 +305,8 @@ export default function AllTables() {
                         </>
                     ) : (
                         <p>Please select an order to see details.</p>
-                    )}
-
+                    )}</div>
+                    <StaffCall/>
                 </Col>
             </Row>
         </Container>

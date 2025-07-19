@@ -18,6 +18,8 @@ export default function ActiveTables() {
     const [menu, setMenu] = useState([]);
     const [selectedOrder, setSelectedOrder] = useState(null);
     const [search, setSearch] = useState("");
+    const [newItem, setNewItem] = useState({ menuId: "", quantity: 1 });
+
 
     useEffect(() => {
         axios.get("http://localhost:9999/orders").then((res) => setOrders(res.data));
@@ -30,6 +32,8 @@ export default function ActiveTables() {
 
     const getMenuName = (menuId) =>
         menu.find((m) => Number(m.id) === Number(menuId))?.name || "Unknown";
+
+    const filteredSearchTablesNames = setSearch ? orders.filter(orders => getTableName(orders.tableId).toLowerCase().includes(search.toLowerCase())) : tables;
 
     const updateOrderItem = (index, field, value) => {
         if (!selectedOrder) return;
@@ -61,26 +65,54 @@ export default function ActiveTables() {
             });
     };
 
+    const handleAddItem = (e) => {
+            e.preventDefault();
+            if (!selectedOrder) return;
+    
+            const updatedOrder = {
+                ...selectedOrder,
+                items: [
+                    ...selectedOrder.items,
+                    {
+                        menuId: Number(newItem.menuId),
+                        quantity: newItem.quantity,
+                        status: "preparing",
+                        remainingMinutes: 10
+                    }
+                ]
+            };
+    
+            axios
+                .put(`http://localhost:9999/orders/${selectedOrder.id}`, updatedOrder)
+                .then(() => {
+                    setOrders((prev) =>
+                        prev.map((o) => (o.id === updatedOrder.id ? updatedOrder : o))
+                    );
+                    setSelectedOrder(updatedOrder);
+                    setNewItem({ menuId: "", quantity: 1 });
+                });
+        };
+
     return (
         <Container style={{ position: "fixed", top: "56px" }}>
-            <Form className="mb-3">
-                        <Form.Group>
-                            <Form.Control
-                                type="text"
-                                placeholder="Search by table name..."
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                            />
-                        </Form.Group>
-                    </Form>
-            <Row>
-                <Col xs={6}>
+            <h1 className="text-center">Active Tables</h1>
+            <div className="text-center">
+                <Form className="mb-3">
+                    <Form.Group>
+                        <Form.Control
+                            type="text"
+                            placeholder="Search by table name..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
+                    </Form.Group>
+                </Form>
+            </div>
+
+            <Row className="mt-4">
+                <Col xs={12} md={8}>
                     <Row>
-                        {orders
-                            .filter((o) =>
-                                getTableName(o.tableId).toLowerCase().includes(search.toLowerCase())
-                            )
-                            .map((o) => (
+                        {filteredSearchTablesNames.map((o) => (
                                 <Col xs={12} md={6} lg={6} key={o.id}>
                                     <Card style={{ marginBottom: '16px' }}>
                                         <Card.Body>
@@ -105,81 +137,127 @@ export default function ActiveTables() {
 
                 </Col>
 
-                <Col xs={6}>
-                    <h6>Order Details</h6>
+                <Col xs={12} md={4}>
+                   <div className="border p-3"><h6>Order Details</h6>
                     {selectedOrder ? (
-                        <Table bordered hover>
-                            <thead>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Quantity</th>
-                                    <th>Status</th>
-                                    <th>Remaining (min)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {selectedOrder.items.map((item, idx) => (
-                                    <tr key={idx}>
-                                        <td>{getMenuName(item.menuId)}</td>
-                                        <td><Button
-                                            variant="outline-secondary"
-                                            size="sm"
-                                            onClick={() => updateOrderItem(idx, "quantity", item.quantity - 1)}
-                                            disabled={item.quantity <= 1}
-                                        >
-                                            -
-                                        </Button>{" "}
-                                            {item.quantity}{" "}
-                                            <Button
-                                                variant="outline-secondary"
-                                                size="sm"
-                                                onClick={() => updateOrderItem(idx, "quantity", item.quantity + 1)}
-                                            >
-                                                +
-                                            </Button></td>
-
-                                        {/* Dropdown đổi status */}
-                                        <td>
-                                            {item.status} 
-                                            <DropdownButton
-                                                as={ButtonGroup}
-                                                size="sm"
-                                                variant="secondary"
-                                                title="Change Status"
-                                                onSelect={(status) => updateOrderItem(idx, "status", status)}
-                                            >
-                                                <Dropdown.Item eventKey="preparing">Preparing</Dropdown.Item>
-                                                <Dropdown.Item eventKey="received">Received</Dropdown.Item>
-                                                <Dropdown.Item eventKey="served">Served</Dropdown.Item>
-                                            </DropdownButton>
-                                        </td>
-
-                                        {/* Dropdown đổi thời gian */}
-                                        <td>
-                                            {item.remainingMinutes} 
-                                            <DropdownButton
-                                                as={ButtonGroup}
-                                                size="sm"
-                                                variant="info"
-                                                title="Change Time"
-                                                onSelect={(val) =>
-                                                    updateOrderItem(idx, "remainingMinutes", val)
-                                                }
-                                            >
-                                                {[3, 5, 10, 15, 20, 30].map((min) => (
-                                                    <Dropdown.Item key={min} eventKey={min}>
-                                                        {min} min
-                                                    </Dropdown.Item>
-                                                ))}
-                                            </DropdownButton>
-                                        </td>
+                        <>
+                            <Table>
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Quantity</th>
+                                        <th>Status</th>
+                                        <th>Remaining (min)</th>
                                     </tr>
-                                ))}
-                            </tbody>
-                        </Table>
+                                </thead>
+                                <tbody>
+                                    {selectedOrder.items.map((item, idx) => (
+                                        <tr key={idx}>
+                                            <td>{getMenuName(item.menuId)}</td>
+                                            <td>
+                                                <Button
+                                                    variant="outline-secondary"
+                                                    size="sm"
+                                                    onClick={() =>
+                                                        updateOrderItem(idx, "quantity", item.quantity - 1)
+                                                    }
+                                                    disabled={item.quantity <= 1}
+                                                >
+                                                    -
+                                                </Button>{" "}
+                                                {item.quantity}{" "}
+                                                <Button
+                                                    variant="outline-secondary"
+                                                    size="sm"
+                                                    onClick={() =>
+                                                        updateOrderItem(idx, "quantity", item.quantity + 1)
+                                                    }
+                                                >
+                                                    +
+                                                </Button>
+                                            </td>
+                                            <td>
+                                                {item.status}
+                                                <DropdownButton
+                                                    as={ButtonGroup}
+                                                    size="sm"
+                                                    variant="secondary"
+                                                    title="Change Status"
+                                                    onSelect={(status) => updateOrderItem(idx, "status", status)}
+                                                >
+                                                    <Dropdown.Item eventKey="preparing">Preparing</Dropdown.Item>
+                                                    <Dropdown.Item eventKey="received">Received</Dropdown.Item>
+                                                    <Dropdown.Item eventKey="served">Served</Dropdown.Item>
+                                                </DropdownButton>
+                                            </td>
+                                            <td>
+                                                {item.remainingMinutes}
+                                                <DropdownButton
+                                                    as={ButtonGroup}
+                                                    size="sm"
+                                                    variant="info"
+                                                    title="Change Time"
+                                                    onSelect={(val) =>
+                                                        updateOrderItem(idx, "remainingMinutes", val)
+                                                    }
+                                                >
+                                                    {[3, 5, 10, 15, 20, 30].map((min) => (
+                                                        <Dropdown.Item key={min} eventKey={min}>
+                                                            {min} min
+                                                        </Dropdown.Item>
+                                                    ))}
+                                                </DropdownButton>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </Table>
+
+                            {selectedOrder.items.length === 0 && (
+                                <>
+                                    <h6 className="mt-3">Add item to new order</h6>
+                                    <Form onSubmit={handleAddItem}>
+                                        <Form.Group>
+                                            <Form.Label>Menu</Form.Label>
+                                            <Form.Select
+                                                value={newItem.menuId}
+                                                onChange={(e) =>
+                                                    setNewItem({ ...newItem, menuId: e.target.value })
+                                                }
+                                                required
+                                            >
+                                                <option value="">-- Choose a dish --</option>
+                                                {menu.map((m) => (
+                                                    <option key={m.id} value={m.id}>
+                                                        {m.name}
+                                                    </option>
+                                                ))}
+                                            </Form.Select>
+                                        </Form.Group>
+
+                                        <Form.Group className="mt-2">
+                                            <Form.Label>Quantity</Form.Label>
+                                            <Form.Control
+                                                type="number"
+                                                value={newItem.quantity}
+                                                onChange={(e) =>
+                                                    setNewItem({ ...newItem, quantity: Number(e.target.value) })
+                                                }
+                                                min={1}
+                                                required
+                                            />
+                                        </Form.Group>
+
+                                        <Button type="submit" className="mt-3">
+                                            Add Item
+                                        </Button>
+                                    </Form>
+                                </>
+                            )}
+                        </>
                     ) : (
                         <p>Please select an order to see details.</p>
-                    )}
+                    )}</div>                    
                 </Col>
             </Row>
         </Container>

@@ -1,17 +1,8 @@
 // Staff.js
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
 import SideBar from '../components/SideBar/SideBar_Staff';
-import Content from './components/AllTables';
-import ActiveTables from './components/ActiveTables';
-import PreparingOrders from './components/PreparingOrders';
-import ReceivedOrders from './components/ServingOrders';
-import ServedOrders from './components/ServedOrders';
-import Header from '../components/Header/Header';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col } from 'react-bootstrap';
-import AllTables from './components/AllTables';
-import { BrowserRouter } from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap';
 import Staff_Header from '../components/Header/Staff_Header';
 import { Outlet } from 'react-router-dom';
 
@@ -27,7 +18,7 @@ function Staff({ setUser }) {
           </Col>
 
           <Col xs={10} className="content">
-            <Outlet />
+            <Outlet/>
           </Col>
         </Row>
       </div>

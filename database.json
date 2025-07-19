@@ -1,16 +1,12 @@
 {
   "staffCalls": [
     {
-      "id": "1",
-      "tableId": 2,
-      "status": "pending",
-      "callTime": "2025-07-01T19:00:00"
+      "status": "received",
+      "id": "1"
     },
     {
-      "id": "2",
-      "tableId": 2,
-      "status": "pending",
-      "callTime": "2025-07-01T19:05:00"
+      "status": "received",
+      "id": "2"
     }
   ],
   "tables": [
