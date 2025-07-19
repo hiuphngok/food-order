@@ -116,6 +116,7 @@ function CustomerScreen({ setUser }) {
           position: 'fixed',
           bottom: 0,
           right: 0,
+          color: 'white',
           backgroundColor: 'orange',
           padding: '12px 20px',
           fontWeight: 'bold',
