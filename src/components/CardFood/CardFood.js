@@ -19,7 +19,7 @@ function CardFood({ id, name, price, image, addToCart, serveTime }) {
           <div className="text-muted" style={{ fontSize: '0.8rem' }}>Cook for {serveTime} minutes</div>
         </div>
         <div className="d-flex justify-content-end">
-          <Button style={{ backgroundColor: '#FFA500', border: 'none', color: 'white' }} size="sm" onClick={() => addToCart({ id, name, price, image, serveTime })}>Add To Cart</Button>
+          <Button style={{ backgroundColor: '#FFA500', border: 'none', color: 'white', padding: '4px 12px', borderRadius: '8px', fontWeight: 'bold' }} size="sm" onClick={() => addToCart({ id, name, price, image, serveTime })}>+</Button>
         </div>
       </Card.Body>
     </Card>

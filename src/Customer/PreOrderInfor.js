@@ -106,7 +106,7 @@ const PreOrderPage = () => {
     const requestData = {
       tableId: tableId,
       time: new Date().toLocaleString('sv-SE', { timeZone: 'Asia/Ho_Chi_Minh' }),
-      status: 'pending'
+      status: 'check-out'
     };
 
     axios.post('http://localhost:9999/staffCalls', requestData)

@@ -220,6 +220,27 @@
       "status": "pending",
       "orderTime": "2025-07-01T19:00:00",
       "expectedServeTime": "2025-07-01T19:15:00"
+    },
+    {
+      "id": "ebdd",
+      "tableId": 2,
+      "items": [
+        {
+          "menuId": "104",
+          "quantity": 2,
+          "status": "ordered",
+          "remainingMinutes": 2
+        },
+        {
+          "menuId": "109",
+          "quantity": 4,
+          "status": "ordered",
+          "remainingMinutes": 2
+        }
+      ],
+      "status": "ordered",
+      "orderTime": "2025-07-19T16:07:22.169Z",
+      "expectedServeTime": "2025-07-19T16:22:22.169Z"
     }
   ],
   "roles": [
