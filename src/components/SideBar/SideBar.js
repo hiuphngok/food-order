@@ -2,7 +2,7 @@ import { Nav } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
-function SideBar() {
+function SideBar({ onCategorySelect }) {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
@@ -27,11 +27,20 @@ function SideBar() {
       <h4 className="p-3">Menu</h4>
 
       <Nav className="flex-column flex-grow-1 px-2">
+        <Nav.Link
+          key="all"
+          href=""
+          className="text-white sidebar-link"
+          onClick={() => onCategorySelect(null)} // nút All
+        >
+          All
+        </Nav.Link>
         {categories.map((cate) => (
           <Nav.Link
             key={cate.id}
-            href="#"
-            className="text-white"
+            href=""
+            className="text-white sidebar-link"
+            onClick={() => onCategorySelect(Number(cate.id))}
           >
             {cate.name}
           </Nav.Link>

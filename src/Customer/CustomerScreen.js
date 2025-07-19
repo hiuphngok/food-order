@@ -9,6 +9,7 @@ function CustomerScreen({ setUser }) {
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('')
 
 
   const handleCallStaff = () => {
@@ -70,8 +71,8 @@ function CustomerScreen({ setUser }) {
 
   return (
     <div>
-      <Header setUser={setUser} />
-      <Home addToCart={addToCart} />
+      <Header setUser={setUser} setSearchTerm={setSearchTerm} />
+      <Home addToCart={addToCart} searchTerm={searchTerm} />
       {/* <TotalAmount /> */}
       <CartModal
         show={showCart}
@@ -115,6 +116,7 @@ function CustomerScreen({ setUser }) {
           position: 'fixed',
           bottom: 0,
           right: 0,
+          color: 'white',
           backgroundColor: 'orange',
           padding: '12px 20px',
           fontWeight: 'bold',

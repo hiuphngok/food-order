@@ -83,6 +83,7 @@
       "name": "Spicy Hotpot Base",
       "price": 159000,
       "categoryId": 1,
+      "image": "spicy-hotpot-base.jpg",
       "serveTime": 3
     },
     {
@@ -90,6 +91,7 @@
       "name": "Mushroom Hotpot Base",
       "price": 149000,
       "categoryId": 1,
+      "image": "mushroom_hotpt_base.jpg",
       "serveTime": 3
     },
     {
@@ -97,6 +99,7 @@
       "name": "Sliced Beef",
       "price": 99000,
       "categoryId": 2,
+      "image": "sliced-beef.jpg",
       "serveTime": 2
     },
     {
@@ -104,6 +107,7 @@
       "name": "Pork Belly",
       "price": 89000,
       "categoryId": 2,
+      "image": "pork-belly.jpg",
       "serveTime": 2
     },
     {
@@ -111,6 +115,7 @@
       "name": "Shrimp",
       "price": 109000,
       "categoryId": 2,
+      "image": "shrimp.webp",
       "serveTime": 3
     },
     {
@@ -118,6 +123,7 @@
       "name": "Fish Balls",
       "price": 49000,
       "categoryId": 2,
+      "image": "fish-ball.jpg",
       "serveTime": 2
     },
     {
@@ -125,6 +131,7 @@
       "name": "Chinese Cabbage",
       "price": 39000,
       "categoryId": 3,
+      "image": "chinese-cabbage.jpg",
       "serveTime": 1
     },
     {
@@ -132,6 +139,7 @@
       "name": "Spinach",
       "price": 29000,
       "categoryId": 3,
+      "image": "spinach.webp",
       "serveTime": 1
     },
     {
@@ -139,6 +147,7 @@
       "name": "Lotus Root",
       "price": 39000,
       "categoryId": 3,
+      "image": "lotus-root.png",
       "serveTime": 2
     },
     {
@@ -146,6 +155,7 @@
       "name": "Coca-Cola",
       "price": 15000,
       "categoryId": 4,
+      "image": "cocacola.jpg",
       "serveTime": 1
     },
     {
@@ -153,6 +163,7 @@
       "name": "Green Tea",
       "price": 12000,
       "categoryId": 4,
+      "image": "green-tea.webp",
       "serveTime": 1
     },
     {
@@ -160,6 +171,7 @@
       "name": "Chili Sauce",
       "price": 10000,
       "categoryId": 5,
+      "image": "chilly-sauce.webp",
       "serveTime": 1
     },
     {
@@ -167,6 +179,7 @@
       "name": "Soy Sauce",
       "price": 8000,
       "categoryId": 5,
+      "image": "soy-sauce.avif",
       "serveTime": 1
     },
     {
@@ -174,6 +187,7 @@
       "name": "Garlic",
       "price": 6000,
       "categoryId": 5,
+      "image": "garlic.webp",
       "serveTime": 1
     },
     {
@@ -181,6 +195,7 @@
       "name": "Instant Noodles",
       "price": 20000,
       "categoryId": 6,
+      "image": "instant-noodle.jpeg",
       "serveTime": 2
     }
   ],
