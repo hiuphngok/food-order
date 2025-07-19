@@ -40,7 +40,7 @@ function Home({ addToCart, searchTerm }) { // vừa bổ sung searchTerm
                     id={item.id}
                     name={item.name}
                     price={item.price}
-                    image="https://img5.thuthuatphanmem.vn/uploads/2021/11/09/anh-do-an-cute-hd_095144068.jpg"
+                    image={item.image}
                     addToCart={addToCart}
                     serveTime={item.serveTime}
                   />

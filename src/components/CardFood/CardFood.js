@@ -7,7 +7,7 @@ function CardFood({ id, name, price, image, addToCart, serveTime }) {
     <Card className="shadow-sm border-0" style={{ borderRadius: '12px', display: 'flex', flexDirection: 'row', overflow: 'hidden', height: '200px' }}>
       <div style={{ flex: '1 1 55%' }}>
         <Card.Img
-          src={image}
+          src={`/images/${image}`}
           alt={name}
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
