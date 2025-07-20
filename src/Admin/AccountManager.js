@@ -70,9 +70,8 @@ export default function AccountManager() {
       
 
       <Container>
-        <Row>
-          <Col xs={2}>
-            <Button
+        <h3 className="my-3">Account Manager</h3>
+        <Button
               className="mb-3"
               onClick={() => {
                 setSelectedUser({
@@ -85,9 +84,9 @@ export default function AccountManager() {
               }}
             >
               Add Account
-            </Button>
-          </Col>
-          <Col xs={5}>
+        </Button>
+        <Row>
+          <Col xs={6}>
             <Form className="mb-3">
               <Form.Group>
                 <Form.Control
@@ -152,7 +151,7 @@ export default function AccountManager() {
             </Table>
           </Col>
 
-          <Col xs={5}>
+          <Col xs={6}>
             <h6>Account Details</h6>
             {selectedUser ? (
               <Form

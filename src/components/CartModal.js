@@ -1,26 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Button, ListGroup } from 'react-bootstrap';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
 
-function CartModal({ show, onClose, cart, changeQuantity, removeItem, total }) {
+function CartModal({ show, onClose, cart, changeQuantity, removeItem, total, showToast }) {
   const [menuData, setMenuData] = useState([]);
 
   useEffect(() => {
     axios.get("http://localhost:9999/menu")
       .then(res => setMenuData(res.data))
-      .catch(err => console.error("Loading failed:", err));
+      .catch(err => console.error("Failed to load menu:", err));
   }, []);
 
   const getServeTime = (menuId) => {
     const item = menuData.find(m => m.id === menuId);
-    return item?.serveTime || 2; // fallback nếu không có
+    return item?.serveTime || 2;
   };
 
   const handleSubmitOrder = () => {
+    if (cart.length === 0) {
+      showToast("Your cart is empty. Please add some items before ordering.");
+      return;
+    }
+    const invalidItems = cart.filter(item => {
+      const menuItem = menuData.find(m => m.id == item.id);
+      return item.quantity > menuItem.stock;
+    });
+
+    if (invalidItems.length > 0) {
+      const message = invalidItems.map(e =>
+        `"${e.name}" (only ${menuData.find(m => m.id == e.id)?.stock} left)`
+      ).join('\n');
+      showToast(`Some items exceed available stock:\n${message}`);
+      return;
+    }
+
     const user = JSON.parse(localStorage.getItem("user"));
     const tableId = user?.tableId;
-
 
     const itemsWithServeTime = cart.map(item => ({
       menuId: item.id,
@@ -39,15 +54,14 @@ function CartModal({ show, onClose, cart, changeQuantity, removeItem, total }) {
 
     axios.post("http://localhost:9999/orders", newOrder)
       .then(() => {
-        alert("Order submitted successfully!");
+        showToast("Order submitted successfully!");
         onClose();
       })
       .catch(err => {
         console.error(err);
-        alert("Failed to submit order. Please try again.");
+        showToast("Failed to submit order. Please try again.");
       });
   };
-
 
   return (
     <Modal show={show} onHide={onClose}>
@@ -61,7 +75,6 @@ function CartModal({ show, onClose, cart, changeQuantity, removeItem, total }) {
           <ListGroup>
             {cart.map(item => (
               <ListGroup.Item key={item.id} className="d-flex gap-3 align-items-center justify-content-between">
-                {/* Ảnh món ăn */}
                 <img
                   src={`/images/${item.image}`}
                   alt={item.name}
@@ -73,8 +86,6 @@ function CartModal({ show, onClose, cart, changeQuantity, removeItem, total }) {
                     flexShrink: 0
                   }}
                 />
-
-                {/* Thông tin món */}
                 <div className="flex-grow-1">
                   <strong>{item.name}</strong>
                   <div className="text-muted" style={{ fontSize: '0.85rem' }}>
@@ -84,15 +95,8 @@ function CartModal({ show, onClose, cart, changeQuantity, removeItem, total }) {
                     </span>
                   </div>
                 </div>
-
-                {/* Nút thao tác */}
                 <div className="d-flex align-items-center">
-                  <Button
-                    size="sm"
-                    variant="outline-secondary"
-                    onClick={() => changeQuantity(item.id, -1)}
-                  >-</Button>
-
+                  <Button size="sm" variant="outline-secondary" onClick={() => changeQuantity(item.id, -1)}>-</Button>
                   <div
                     style={{
                       padding: '3.5px 0px',
@@ -104,32 +108,17 @@ function CartModal({ show, onClose, cart, changeQuantity, removeItem, total }) {
                   >
                     {item.quantity}
                   </div>
-
-                  <Button
-                    size="sm"
-                    variant="outline-secondary"
-                    onClick={() => changeQuantity(item.id, 1)}
-                  >+</Button>
-
-                  <Button
-                    size="sm"
-                    variant="outline-danger"
-                    style={{ marginLeft: '8px' }}
-                    onClick={() => removeItem(item.id)}
-                  >Remove</Button>
+                  <Button size="sm" variant="outline-secondary" onClick={() => changeQuantity(item.id, 1)}>+</Button>
+                  <Button size="sm" variant="outline-danger" style={{ marginLeft: '8px' }} onClick={() => removeItem(item.id)}>Remove</Button>
                 </div>
               </ListGroup.Item>
-
             ))}
           </ListGroup>
-
         )}
       </Modal.Body>
       <Modal.Footer>
         <strong>Total: {total.toLocaleString()}₫</strong>
-        <Button variant="success" onClick={handleSubmitOrder}>
-          Submit Order
-        </Button>
+        <Button variant="success" onClick={handleSubmitOrder}>Submit Order</Button>
       </Modal.Footer>
     </Modal>
   );

@@ -35,6 +35,13 @@ export default function Admin_SideBar() {
         >
           Tables Manager
         </Nav.Link>
+        <Nav.Link
+          as={NavLink}
+          to="sales"
+          className="sidebar-link"
+        >
+          Sales Statistics
+        </Nav.Link>
       </Nav>
     </div>
   );

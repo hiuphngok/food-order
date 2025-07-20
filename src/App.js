@@ -14,6 +14,7 @@ import TableManager from "./Admin/TableManager";
 import ActiveTables from "./Staff/components/ActiveTables";
 import AllTables from "./Staff/components/AllTables";
 import Checkout from "./Staff/components/Checkout";
+import SalesStatistics from "./Admin/SalesStatistics";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -69,6 +70,7 @@ export default function App() {
             <Route path="orders" element={<OrderManager />} />
             <Route path="users" element={<AccountManager />} />
             <Route path="tables" element={<TableManager />} />
+            <Route path="sales" element={<SalesStatistics />} />
           </Route>
           <Route path="*" element={<Navigate to="/admin" />} />
         </>

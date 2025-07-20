@@ -8,9 +8,16 @@ import { Bell, ShoppingCart } from 'lucide-react';
 function CustomerScreen({ setUser }) {
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
   const [showToast, setShowToast] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState('');
+  const [menu, setMenu] = useState([]); // ✅ Add this
 
+  const showToastWithMessage = (msg) => {
+    setToastMessage(msg);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
 
   const handleCallStaff = () => {
     const requestData = {
@@ -21,27 +28,33 @@ function CustomerScreen({ setUser }) {
 
     fetch('http://localhost:9999/staffCalls', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(requestData)
     })
-      .then((res) => {
-        if (!res.ok) throw new Error('Lỗi gửi yêu cầu');
+      .then(res => {
+        if (!res.ok) throw new Error('Request failed');
         return res.json();
       })
       .then(() => {
-        setShowToast(true); // Hiện thông báo thành công
+        showToastWithMessage('Sent a request to the staff!');
       })
       .catch((err) => {
-        console.error('Gửi thất bại:', err);
-        alert('Không thể gửi yêu cầu đến nhân viên.');
+        console.error('Request failed:', err);
+        showToastWithMessage('Failed to send request to staff.');
       });
-  }
+  };
 
   const addToCart = (product) => {
     setCart(prev => {
       const found = prev.find(item => item.id === product.id);
+      const inCartQuantity = found ? found.quantity : 0;
+
+      const menuItem = menu.find(m => m.id == product.id);
+      if (menuItem && inCartQuantity + 1 > menuItem.stock) {
+        showToastWithMessage(`"${product.name}" only has ${menuItem.stock} left in stock.`);
+        return prev;
+      }
+
       if (found) {
         return prev.map(item =>
           item.id === product.id
@@ -54,13 +67,20 @@ function CustomerScreen({ setUser }) {
   };
 
   const changeQuantity = (id, amount) => {
-    setCart(prev =>
-      prev.map(item =>
-        item.id === id
-          ? { ...item, quantity: Math.max(item.quantity + amount, 1) }
-          : item
-      )
-    );
+    setCart(prev => {
+      return prev.map(item => {
+        if (item.id === id) {
+          const newQuantity = item.quantity + amount;
+          const menuItem = menu.find(m => m.id == id);
+          if (newQuantity > menuItem.stock) {
+            showToastWithMessage(`"${item.name}" only has ${menuItem.stock} left.`);
+            return item;
+          }
+          return { ...item, quantity: Math.max(newQuantity, 1) };
+        }
+        return item;
+      });
+    });
   };
 
   const removeItem = (id) => {
@@ -72,8 +92,7 @@ function CustomerScreen({ setUser }) {
   return (
     <div>
       <Header setUser={setUser} setSearchTerm={setSearchTerm} />
-      <Home addToCart={addToCart} searchTerm={searchTerm} />
-      {/* <TotalAmount /> */}
+      <Home addToCart={addToCart} searchTerm={searchTerm} setMenu={setMenu} />
       <CartModal
         show={showCart}
         onClose={() => setShowCart(false)}
@@ -81,7 +100,9 @@ function CustomerScreen({ setUser }) {
         changeQuantity={changeQuantity}
         removeItem={removeItem}
         total={total}
+        showToast={showToastWithMessage}
       />
+
       <Button
         title='Call Staff'
         style={{
@@ -98,18 +119,12 @@ function CustomerScreen({ setUser }) {
       >
         <Bell />
       </Button>
-      <ToastContainer style={{ position: 'fixed', right: 0, top: 50 }} className="p-3">
-        <Toast
-          onClose={() => setShowToast(false)}
-          show={showToast}
-          delay={3000}
-          autohide
-          bg="success"
-        >
-          <Toast.Body className="text-white">Đã gửi yêu cầu gọi nhân viên!</Toast.Body>
+
+      <ToastContainer style={{ position: 'fixed', right: 0, top: 50 }}>
+        <Toast onClose={() => setShowToast(false)} show={showToast} delay={3000} autohide bg="primary">
+          <Toast.Body className="text-white">{toastMessage}</Toast.Body>
         </Toast>
       </ToastContainer>
-
 
       <button
         style={{
@@ -129,7 +144,6 @@ function CustomerScreen({ setUser }) {
         <ShoppingCart /> {total.toLocaleString()}₫
       </button>
     </div>
-
   );
 }
 
