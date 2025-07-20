@@ -24,6 +24,7 @@ export default function MenuManager(){
         price: Number(product.price),
         serveTime: Number(product.serveTime),
         categoryId: Number(product.categoryId),
+        stock: Number(product.stock),
         // chỉ giữ id nếu đang sửa (đừng có id khi thêm mới)
         ...(product.id ? { id: Number(product.id) } : {})
     });
@@ -83,6 +84,7 @@ export default function MenuManager(){
 
     return(
         <>
+        <h3 className="my-3">Menu Manager</h3>
         <Button className="mb-3" onClick={() => {
             setSelectedProduct({
                 name: "",
@@ -117,6 +119,7 @@ export default function MenuManager(){
                                     <th>Price</th>
                                     <th>Category</th>
                                     <th>Serve Time</th>
+                                    <th>Stock</th>
                                     <th>View Details</th>
                                 </tr>
                             </thead>
@@ -145,6 +148,7 @@ export default function MenuManager(){
                                                                     }
                                                                 </td>
                                                                 <td>{m.serveTime}</td>
+                                                                <td>{m.stock}</td>
                                                                 <td>
                                                                     <Button 
                                                                         className="btn btn-secondary"
@@ -173,81 +177,120 @@ export default function MenuManager(){
                             handleSubmit();
                         }}
                         >
-                        <Form.Group className="mb-3">
-                            <Form.Label>Product Name</Form.Label>
-                            <Form.Control
-                            value={selectedProduct.name}
-                            onChange={(e) =>
-                                setSelectedProduct({ ...selectedProduct, name: e.target.value })
-                            }
-                            />
-                        </Form.Group>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Product Name</Form.Label>
+                                <Form.Control
+                                value={selectedProduct.name}
+                                onChange={(e) =>
+                                    setSelectedProduct({ ...selectedProduct, name: e.target.value })
+                                }
+                                />
+                            </Form.Group>
 
-                        <Form.Group className="mb-3">
-                            <Form.Label>Price</Form.Label>
-                            <Form.Control
-                            type="number"
-                            value={selectedProduct.price}
-                            onChange={(e) =>
-                                setSelectedProduct({
-                                ...selectedProduct,
-                                price: Number(e.target.value),
-                                })
-                            }
-                            />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                            <Form.Label>Serve Time (minutes)</Form.Label>
-                            <Form.Control
-                            type="number"
-                            value={selectedProduct.serveTime}
-                            onChange={(e) =>
-                                setSelectedProduct({
-                                ...selectedProduct,
-                                serveTime: Number(e.target.value),
-                                })
-                            }
-                            />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                            <Form.Label>Category</Form.Label>
-                            <Form.Select
-                                value={selectedProduct.categoryId}
+                            <Form.Group className="mb-3">
+                                <Form.Label>Price</Form.Label>
+                                <Form.Control
+                                type="number"
+                                value={selectedProduct.price}
                                 onChange={(e) =>
                                     setSelectedProduct({
                                     ...selectedProduct,
-                                    categoryId: Number(e.target.value),
+                                    price: Number(e.target.value),
                                     })
                                 }
-                            >
-                                {categories.map((c) => (
-                                    <option key={c.id} value={c.id}>
-                                    {c.name}
-                                    </option>
-                                ))}
-                            </Form.Select>
-                        </Form.Group>
+                                />
+                            </Form.Group>
 
-                        <Button type="submit" className="btn btn-primary">
-                            {isAdding ? "Add" : "Save Changes"}
-                        </Button>
-                        <Button
-                            variant="danger"
-                            className="ms-2"
-                            onClick={() => {
-                                    const confirmDelete = window.confirm(
-                                    `Bạn có chắc muốn xoá món "${selectedProduct.name}"?`
-                                    );
-                                    if (confirmDelete) {
-                                    handleDelete();
+                            <Form.Group className="mb-3">
+                                <Form.Label>Serve Time (minutes)</Form.Label>
+                                <Form.Control
+                                type="number"
+                                value={selectedProduct.serveTime}
+                                onChange={(e) =>
+                                    setSelectedProduct({
+                                    ...selectedProduct,
+                                    serveTime: Number(e.target.value),
+                                    })
+                                }
+                                />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3">
+                                <Form.Label>Category</Form.Label>
+                                <Form.Select
+                                    value={selectedProduct.categoryId}
+                                    onChange={(e) =>
+                                        setSelectedProduct({
+                                        ...selectedProduct,
+                                        categoryId: Number(e.target.value),
+                                        })
                                     }
-                                
-                            }}
-                        >
-                            Delete Product
-                        </Button>
+                                >
+                                    {categories.map((c) => (
+                                        <option key={c.id} value={c.id}>
+                                        {c.name}
+                                        </option>
+                                    ))}
+                                </Form.Select>
+                            </Form.Group>
+
+                            <Form.Group className="mb-3">
+                                <Form.Label>Stock</Form.Label>
+                                <Form.Control
+                                type="number"
+                                value={selectedProduct.stock}
+                                onChange={(e) =>
+                                    setSelectedProduct({
+                                    ...selectedProduct,
+                                    stock: Number(e.target.value),
+                                    })
+                                }
+                                />
+                            </Form.Group>            
+
+                            <Form.Group className="mb-3">
+                                <Form.Label>Image</Form.Label>
+                                <Form.Control
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) => {
+                                    const file = e.target.files[0];
+                                    if (file) {
+                                        const imageName = file.name;
+                                        setSelectedProduct({
+                                        ...selectedProduct,
+                                        image: imageName,
+                                        });
+                                    }
+                                    }}
+                                />
+                                {selectedProduct.image && (
+                                    <img
+                                    src={`/images/${selectedProduct.image}`}
+                                    alt="preview"
+                                    style={{ width: "100px", height: "100px", marginTop: "10px", objectFit: "cover" }}
+                                    />
+                                )}
+                            </Form.Group>
+
+                            <Button type="submit" className="btn btn-primary">
+                                {isAdding ? "Add" : "Save Changes"}
+                            </Button>
+                            <Button
+                                variant="danger"
+                                className="ms-2"
+                                onClick={() => {
+                                        const confirmDelete = window.confirm(
+                                        `Bạn có chắc muốn xoá món "${selectedProduct.name}"?`
+                                        );
+                                        if (confirmDelete) {
+                                        handleDelete();
+                                        }
+                                    
+                                }}
+                            >
+                                Delete Product
+                            </Button>
                         </Form>
                     ) : (
                         <p>Please select a product!</p>
