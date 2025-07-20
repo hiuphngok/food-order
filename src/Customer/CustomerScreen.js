@@ -98,7 +98,7 @@ function CustomerScreen({ setUser }) {
       >
         <Bell />
       </Button>
-      <ToastContainer style={{ position: 'fixed', right: 0, top: 50 }} className="p-3">
+      <ToastContainer style={{ position: 'fixed', right: 0, top: 50 }} className="">
         <Toast
           onClose={() => setShowToast(false)}
           show={showToast}
@@ -106,7 +106,7 @@ function CustomerScreen({ setUser }) {
           autohide
           bg="success"
         >
-          <Toast.Body className="text-white">Đã gửi yêu cầu gọi nhân viên!</Toast.Body>
+          <Toast.Body className="text-white">Sent a request to call the staff!</Toast.Body>
         </Toast>
       </ToastContainer>
 
