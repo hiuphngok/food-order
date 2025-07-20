@@ -10,18 +10,18 @@ import { Outlet } from 'react-router-dom';
 
 function Staff({ setUser }) {
   return (
-      <div style={{ width: '100%', height: '100%'}}>
+      <>
         <Staff_Header setUser={setUser} />
-        <Row style={{ margin: 0 }}>
-          <Col xs={2} className="sidebar">
+        <Row fluid style={{ paddingTop: '56px' }}>
+          <Col lg={2} md={3} className="gx-0">
             <SideBar />
           </Col>
 
-          <Col xs={10} className="content">
+          <Col lg={10} md={9} className="pt-5 px-4 gx-0">
             <Outlet/>
           </Col>
         </Row>
-      </div>
+      </>
 
   );
 }

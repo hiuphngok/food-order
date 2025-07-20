@@ -50,18 +50,18 @@ const StaffCall = () => {
             {showCalls && (
                 pendingCalls.length > 0 ? (
                     pendingCalls.map((c) => (
-                        <div key={c.id} variant="primary" className="fixed bottom-0 left-0 w-full bg-blue-600 text-white py-2 d-flex justify-content-center">Table {c.tableId} is calling for staff from {c.time}
-                            <Button variant="secondary" className="ml-2" onClick={() => receiveCall(c.id)}> Receive</Button>
+                        <div key={c.id} className="staff-call-box">Table {c.tableId} is calling for staff from {c.time}
+                            <Button size="sm" onClick={() => receiveCall(c.id)}> Receive</Button>
                         </div>
                     ))
                 ) : (
                     <p>No pending calls</p>
                 )
             )}
-            <Button variant="primary" className="fixed bottom-0 left-0 w-full bg-blue-600 text-white py-2"
+            <Button className="staff-call-btn"
                 onClick={() => setShowCalls(!showCalls)}>
-                <Bell className="inline mr-2" />
-                <Badge bg="secondary">
+                <Bell style={{ marginRight: "10px" }} />
+                <Badge className="staff-call-badge">
                     {pendingCallsNumber > 0 ? pendingCallsNumber : "0"}
                 </Badge>
             </Button>

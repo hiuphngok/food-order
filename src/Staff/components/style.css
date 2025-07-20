@@ -1,0 +1,196 @@
+/* ==================== GLOBAL RESET & BASE ==================== */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fffef9;
+  margin: 0;
+  padding: 0;
+  color: #4a2700;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #4a2700;
+  font-weight: 600;
+}
+
+button, .btn {
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.table {
+  background-color: #fffdf5;
+}
+
+/* ==================== STAFF CALL (BOTTOM NOTIFY) ==================== */
+.staff-call-btn {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f6c100;
+  color: #4a2700;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  z-index: 9999;
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
+.staff-call-btn:hover {
+  background-color: #e5b100;
+}
+
+.staff-call-badge {
+  margin-left: 10px;
+  background-color: #fff3cd;
+  color: #4a2700;
+  font-size: 14px;
+  padding: 4px 10px;
+  border-radius: 10px;
+}
+
+.staff-call-box {
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+  width: 100%;
+  background-color: #fff8e1;
+  color: #4a2700;
+  font-weight: 500;
+  padding: 12px;
+  text-align: center;
+  z-index: 9998;
+  border-top: 2px solid #f6c100;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.staff-call-box button {
+  margin-left: 10px;
+  background-color: #f6c100;
+  border-color: #e5b100;
+  color: #4a2700;
+  font-weight: 600;
+}
+
+.staff-call-box button:hover {
+  background-color: #ddb000;
+  border-color: #c8a000;
+}
+
+/* ==================== CHECKOUT TABLE ==================== */
+.checkout-table {
+  border: 1px solid #f6c100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.checkout-table th {
+  background-color: #fff3cd;
+  color: #4a2700;
+  text-align: center;
+  font-weight: bold;
+}
+
+.checkout-table td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.checkout-subtable th {
+  background-color: #fffde7;
+  color: #4a2700;
+  font-size: 13px;
+}
+
+.checkout-subtable td {
+  font-size: 13px;
+}
+
+/* ==================== ACTION BUTTONS ==================== */
+.btn-success {
+  background-color: #f6c100;
+  border-color: #e5b100;
+  color: #4a2700;
+}
+
+.btn-success:hover {
+  background-color: #ddb000;
+  border-color: #c8a000;
+  color: #3a1e00;
+}
+
+.btn-paid {
+  background-color: #f6c100;
+  color: #4a2700;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+.btn-paid:hover {
+  background-color: #e0ad00;
+  color: #3a1e00;
+}
+
+/* ==================== QR CODE BOX ==================== */
+.qr-box {
+  border: 2px dashed #f6c100;
+  padding: 20px;
+  text-align: center;
+  background-color: #fffef2;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.qr-box h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+/* ==================== HELPER CLASSES ==================== */
+.text-center {
+  text-align: center;
+}
+
+.mt-3 {
+  margin-top: 1rem;
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+.p-3 {
+  padding: 1rem;
+}
+
+.border {
+  border: 1px solid #f6c100 !important;
+  border-radius: 10px;
+}
+
+.bg-yellow {
+  background-color: #f6c100;
+  color: #4a2700;
+}
+
+/* ==================== RESPONSIVE TABLE ADJUSTMENT ==================== */
+@media (max-width: 768px) {
+  .checkout-table, .checkout-subtable {
+    font-size: 12px;
+  }
+
+  .qr-box h1 {
+    font-size: 28px;
+  }
+
+  .btn-paid {
+    font-size: 14px;
+  }
+}

@@ -42,7 +42,7 @@ export default function App() {
 
   return (
     <Routes>
-      <Route path="/login" element={<Login setUser={setUser} />} />
+      <Route path="/login" element={<Login setUser={setUser} />}/>
       {user.roleId === 1 && (
         <>
           <Route path="/pre-order" element={<PreOrderPage />} />

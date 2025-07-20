@@ -7,6 +7,78 @@
     {
       "status": "received",
       "id": "2"
+    },
+    {
+      "id": "6cfa",
+      "tableId": 2,
+      "time": "2025-07-20 21:55:41",
+      "status": "check-out"
+    },
+    {
+      "id": "8a0e",
+      "tableId": 2,
+      "time": "2025-07-21 00:16:43",
+      "status": "received"
+    },
+    {
+      "id": "dcdf",
+      "tableId": 2,
+      "time": "2025-07-21 00:17:16",
+      "status": "received"
+    },
+    {
+      "id": "8186",
+      "tableId": 2,
+      "time": "2025-07-21 00:17:17",
+      "status": "received"
+    },
+    {
+      "id": "8212",
+      "tableId": 2,
+      "time": "2025-07-21 00:17:17",
+      "status": "received"
+    },
+    {
+      "id": "c3d5",
+      "tableId": 2,
+      "time": "2025-07-21 00:17:17",
+      "status": "pending"
+    },
+    {
+      "id": "8a87",
+      "tableId": 2,
+      "time": "2025-07-21 00:17:17",
+      "status": "received"
+    },
+    {
+      "id": "53ef",
+      "tableId": 2,
+      "time": "2025-07-21 00:17:18",
+      "status": "received"
+    },
+    {
+      "id": "5212",
+      "tableId": 2,
+      "time": "2025-07-21 00:17:18",
+      "status": "received"
+    },
+    {
+      "id": "845f",
+      "tableId": 2,
+      "time": "2025-07-21 00:19:05",
+      "status": "check-out"
+    },
+    {
+      "id": "c699",
+      "tableId": 2,
+      "time": "2025-07-21 00:19:07",
+      "status": "check-out"
+    },
+    {
+      "id": "4ac0",
+      "tableId": 2,
+      "time": "2025-07-21 00:19:10",
+      "status": "check-out"
     }
   ],
   "tables": [
@@ -215,6 +287,24 @@
           "quantity": 1,
           "status": "received",
           "remainingMinutes": 5
+        },
+        {
+          "menuId": 105,
+          "quantity": 3,
+          "status": "preparing",
+          "remainingMinutes": 10
+        },
+        {
+          "menuId": 112,
+          "quantity": 2,
+          "status": "preparing",
+          "remainingMinutes": 10
+        },
+        {
+          "menuId": 104,
+          "quantity": 3,
+          "status": "preparing",
+          "remainingMinutes": 10
         }
       ],
       "status": "pending",
@@ -241,6 +331,56 @@
       "status": "ordered",
       "orderTime": "2025-07-19T16:07:22.169Z",
       "expectedServeTime": "2025-07-19T16:22:22.169Z"
+    },
+    {
+      "id": "38fe",
+      "tableId": 2,
+      "items": [
+        {
+          "menuId": "101",
+          "quantity": 1,
+          "status": "ordered",
+          "remainingMinutes": 3
+        },
+        {
+          "menuId": "102",
+          "quantity": 2,
+          "status": "ordered",
+          "remainingMinutes": 3
+        },
+        {
+          "menuId": "103",
+          "quantity": 1,
+          "status": "ordered",
+          "remainingMinutes": 2
+        }
+      ],
+      "status": "ordered",
+      "orderTime": "2025-07-20T14:55:31.176Z",
+      "expectedServeTime": "2025-07-20T15:10:31.176Z"
+    },
+    {
+      "id": "4125",
+      "tableId": 2,
+      "items": [
+        {
+          "menuId": "104",
+          "quantity": 1,
+          "status": "ordered",
+          "remainingMinutes": 2
+        }
+      ],
+      "status": "ordered",
+      "orderTime": "2025-07-20T17:18:48.523Z",
+      "expectedServeTime": "2025-07-20T17:33:48.523Z"
+    },
+    {
+      "id": "bfbc",
+      "tableId": "1",
+      "status": "pending",
+      "orderTime": "2025-07-20T17:38:45.360Z",
+      "expectedServeTime": "2025-07-20T17:53:45.360Z",
+      "items": []
     }
   ],
   "roles": [
