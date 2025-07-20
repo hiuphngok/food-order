@@ -96,6 +96,11 @@ const PreOrderPage = () => {
     return item ? item.price : 0;
   };
 
+  const getItemStock = (menuId) => {
+    const item = menu.find(m => m.id == menuId);
+    return item ? item.stock : 0;
+  };
+
   const canEdit = (status) => status === 'ordered';
 
   const handleEdit = (item) => {
@@ -116,6 +121,16 @@ const PreOrderPage = () => {
     if (newQuantity <= 0) {
       setAlertMessage('Quantity must be greater than 0.');
       setShowAlert(true);
+      setShowEditModal(false);
+      setTimeout(() => setShowAlert(false), 3000);
+      return;
+    }
+
+    const stock = getItemStock(editItem.menuId);
+    if (newQuantity > stock) {
+      setAlertMessage(`"${getItemName(editItem.menuId)}" only has ${stock} left in stock.`);
+      setShowAlert(true);
+      setShowEditModal(false);
       setTimeout(() => setShowAlert(false), 3000);
       return;
     }

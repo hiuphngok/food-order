@@ -4,14 +4,17 @@ import { Row, Col, Spinner, Alert, Container } from 'react-bootstrap';
 import CardFood from '../components/CardFood/CardFood';
 import SideBar from '../components/SideBar/SideBar';
 
-function Home({ addToCart, searchTerm }) { // vừa bổ sung searchTerm
+function Home({ addToCart, searchTerm, setMenu }) { // vừa bổ sung searchTerm
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   useEffect(() => {
     axios.get('http://localhost:9999/menu')
-      .then(res => setMenuItems(res.data))
+      .then(res => {
+        setMenuItems(res.data);
+        setMenu(res.data);
+      })
       .catch(err => console.error(err))
       .finally(() => setLoading(false));
   }, []);
