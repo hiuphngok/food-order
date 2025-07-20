@@ -58,11 +58,11 @@ export default function TableManager() {
 
     //Check user
     const isTableInUse = users.some(
-      (u) => u.roleId === 1 && u.tableId === selectedTable.id
+      (u) => u.roleId == 1 && u.tableId == selectedTable.id
     );
 
     if (isTableInUse) {
-      alert("Table is In Use!");
+      alert("Table is In Use");
       return;
     }
 

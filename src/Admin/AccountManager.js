@@ -79,7 +79,7 @@ export default function AccountManager() {
                   username: "",
                   password: "",
                   roleId: roles[0]?.id || 1,
-                  tableId: undefined
+                  tableId: roles[0]?.id == 1 ? availableTables[0]?.id : undefined
                 });
                 setIsAdding(true);
               }}
@@ -196,13 +196,14 @@ export default function AccountManager() {
                   <Form.Label>Role</Form.Label>
                   <Form.Select
                     value={selectedUser.roleId}
-                    onChange={(e) =>
-                      setSelectedUser({
-                        ...selectedUser,
-                        roleId: Number(e.target.value),
-                        tableId: Number(e.target.value) === 1 ? tables[0]?.id : undefined
-                      })
-                    }
+                    onChange={(e) => {
+                      const roleId = Number(e.target.value);
+                      setSelectedUser((prev) => ({
+                        ...prev,
+                        roleId,
+                        tableId: roleId == 1 ? availableTables[0]?.id : undefined
+                      }));
+                    }}
                   >
                     {roles.map((r) => (
                       <option key={r.id} value={r.id}>
