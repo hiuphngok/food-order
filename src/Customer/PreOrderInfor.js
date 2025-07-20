@@ -365,7 +365,7 @@ const PreOrderPage = ({ setUser }) => {
       </Row>
 
       <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
-        <Modal.Header closeButton><Modal.Title>Edit Item Quantity</Modal.Title></Modal.Header>
+        <Modal.Header closeButton><Modal.Title>Edit Food Quantity</Modal.Title></Modal.Header>
         <Modal.Body>
           {editItem && (
             <Form>
