@@ -11,6 +11,7 @@ import {
     ButtonGroup, Card
 } from "react-bootstrap";
 import axios from "axios";
+import StaffCall from "./StaffCall";
 
 export default function ActiveTables() {
     const [orders, setOrders] = useState([]);
@@ -257,7 +258,9 @@ export default function ActiveTables() {
                         </>
                     ) : (
                         <p>Please select an order to see details.</p>
-                    )}</div>                    
+                    )}
+                    </div>   
+                    <StaffCall />                 
                 </Col>
             </Row>
         </Container>

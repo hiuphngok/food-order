@@ -55,6 +55,7 @@ export default function App() {
           <Route index element={<AllTables />} />
           <Route path="all" element={<AllTables />} />
           <Route path="active" element={<ActiveTables />} />
+          <Route path="checkout" element={<Checkout />} />
           </Route>
           <Route path="*" element={<Navigate to="/staff" />} />
         </>
