@@ -50,7 +50,7 @@ const StaffCall = () => {
             {showCalls && (
                 pendingCalls.length > 0 ? (
                     pendingCalls.map((c) => (
-                        <div key={c.id} variant="primary" className="fixed bottom-0 left-0 w-full bg-blue-600 text-white py-2 d-flex justify-content-center">Table {c.tableId} is calling for staff from {c.callTime}
+                        <div key={c.id} variant="primary" className="fixed bottom-0 left-0 w-full bg-blue-600 text-white py-2 d-flex justify-content-center">Table {c.tableId} is calling for staff from {c.time}
                             <Button variant="secondary" className="ml-2" onClick={() => receiveCall(c.id)}> Receive</Button>
                         </div>
                     ))
