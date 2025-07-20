@@ -90,7 +90,7 @@ export default function TableManager() {
                   <td>{t.id}</td>
                   <td>{t.name}</td>
                   <td>
-                    {orders.some(o => o.tableId == t.id) ? (
+                    {orders.some(o => o.tableId == t.id && o.status === "pending") ? (
                       <span className="badge bg-success">Active</span>
                     ) : (
                       <span className="badge bg-danger">Inactive</span>
