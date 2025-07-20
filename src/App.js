@@ -13,8 +13,6 @@ import PreOrderPage from "./Customer/PreOrderInfor";
 import TableManager from "./Admin/TableManager";
 import ActiveTables from "./Staff/components/ActiveTables";
 import AllTables from "./Staff/components/AllTables";
-import Checkout from "./Staff/components/Checkout";
-
 
 export default function App() {
   const [user, setUser] = useState(null);
