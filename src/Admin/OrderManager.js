@@ -24,6 +24,7 @@ export default function OrderManager() {
   return (
     <>
       <Container>
+        <h3 className="my-3">Order Manager</h3>
         <Row>
           <Col xs={6}>
             <Form className="mb-3">
