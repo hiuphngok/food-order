@@ -32,6 +32,7 @@ export default function AccountManager() {
       const { id, ...payload } = cleaned;
       axios.post("http://localhost:9999/users", payload).then((res) => {
         setUsers([...users, res.data]);
+        window.dispatchEvent(new Event("user-updated"));
         alert("Đã thêm tài khoản!");
         setSelectedUser(null);
         setIsAdding(false);

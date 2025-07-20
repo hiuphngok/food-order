@@ -10,16 +10,25 @@ export default function TableManager() {
   const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:9999/tables")
-      .then((res) => setTables(res.data))
-      .catch((err) => console.error(err));
+    const fetchData = () => {
+      axios.get("http://localhost:9999/tables")
+        .then((res) => setTables(res.data))
+        .catch((err) => console.error(err));
 
-    axios.get("http://localhost:9999/users")
-      .then((res) => setUsers(res.data))
-      .catch((err) => console.error(err));
+      axios.get("http://localhost:9999/users")
+        .then((res) => setUsers(res.data))
+        .catch((err) => console.error(err));
 
-    axios.get("http://localhost:9999/orders")
-      .then(res => setOrders(res.data));
+      axios.get("http://localhost:9999/orders")
+        .then(res => setOrders(res.data));
+    }
+    
+    fetchData();
+      window.addEventListener("user-updated", fetchData);
+
+    return () => {
+      window.removeEventListener("user-updated", fetchData);
+    };
   }, []);
 
   const handleSubmit = (e) => {
@@ -46,6 +55,16 @@ export default function TableManager() {
 
   const handleDelete = () => {
     if (!selectedTable?.id) return;
+
+    //Check user
+    const isTableInUse = users.some(
+      (u) => u.roleId === 1 && u.tableId === selectedTable.id
+    );
+
+    if (isTableInUse) {
+      alert("Table is In Use!");
+      return;
+    }
 
     if (window.confirm(`Bạn có chắc muốn xoá bàn "${selectedTable.name}" không?`)) {
       axios.delete(`http://localhost:9999/tables/${selectedTable.id}`)
