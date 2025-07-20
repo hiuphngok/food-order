@@ -5,7 +5,7 @@ import './index.css'
 import { useNavigate } from 'react-router-dom';
 import { hover } from '@testing-library/user-event/dist/hover';
 
-function Header({ setUser, setSearchTerm }) { // vừa bổ sung setSearchTerm
+function Header({ setUser, setSearchTerm, hideSearch }) { // vừa bổ sung setSearchTerm
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -28,17 +28,21 @@ function Header({ setUser, setSearchTerm }) { // vừa bổ sung setSearchTerm
             <Navbar.Brand style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>Food Order</Navbar.Brand>
           </Col>
 
+
+
           {user?.roleId === 1 && (
             <Col md={6}>
-              <Form className="d-flex">
-                <Form.Control
-                  type="text"
-                  placeholder="Search"
-                  className="me-2 text-white custom-input"
-                  style={{ minWidth: '200px', backgroundColor: '#101012', border: 'none' }}
-                  onChange={handleSearchChange}
-                />
-              </Form>
+              {!hideSearch && (
+                <Form className="d-flex">
+                  <Form.Control
+                    type="text"
+                    placeholder="Search"
+                    className="me-2 text-white custom-input"
+                    style={{ minWidth: '200px', backgroundColor: '#101012', border: 'none' }}
+                    onChange={handleSearchChange}
+                  />
+                </Form>
+              )}
             </Col>
           )}
 
