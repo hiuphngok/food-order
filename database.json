@@ -1,85 +1,5 @@
 {
-  "staffCalls": [
-   
-    {
-      "id": "0449",
-      "tableId": 2,
-      "time": "2025-07-21 09:34:24",
-      "status": "pending"
-    },
-    {
-      "id": "b5f2",
-      "tableId": 2,
-      "time": "2025-07-21 09:34:24",
-      "status": "pending"
-    },
-    {
-      "id": "8286",
-      "tableId": 2,
-      "time": "2025-07-21 09:34:24",
-      "status": "pending"
-    },
-    {
-      "id": "198c",
-      "tableId": 2,
-      "time": "2025-07-21 09:34:24",
-      "status": "pending"
-    },
-    {
-      "id": "dff4",
-      "tableId": 2,
-      "time": "2025-07-21 09:34:25",
-      "status": "pending"
-    },
-    {
-      "id": "34a8",
-      "tableId": 2,
-      "time": "2025-07-21 09:34:25",
-      "status": "pending"
-    },
-    {
-      "id": "1cae",
-      "tableId": 2,
-      "time": "2025-07-21 09:34:25",
-      "status": "pending"
-    },
-    {
-      "id": "9288",
-      "tableId": 2,
-      "time": "2025-07-21 09:34:25",
-      "status": "pending"
-    },
-    {
-      "id": "7c36",
-      "tableId": 2,
-      "time": "2025-07-21 09:34:25",
-      "status": "pending"
-    },
-    {
-      "id": "a0c6",
-      "tableId": 2,
-      "time": "2025-07-21 09:34:26",
-      "status": "pending"
-    },
-    {
-      "id": "168a",
-      "tableId": 2,
-      "time": "2025-07-21 09:34:26",
-      "status": "pending"
-    },
-    {
-      "id": "b4b0",
-      "tableId": 2,
-      "time": "2025-07-21 09:34:26",
-      "status": "pending"
-    },
-    {
-      "id": "92d3",
-      "tableId": 2,
-      "time": "2025-07-21 09:34:26",
-      "status": "pending"
-    }
-  ],
+  "staffCalls": [],
   "tables": [
     {
       "id": "1",
@@ -285,43 +205,7 @@
       "stock": 100
     }
   ],
-  "orders": [
-    {
-      "id": "bfbc",
-      "tableId": "1",
-      "status": "pending",
-      "orderTime": "2025-07-20T17:38:45.360Z",
-      "expectedServeTime": "2025-07-20T17:53:45.360Z",
-      "items": []
-    },
-    {
-      "id": "374b",
-      "tableId": 2,
-      "items": [
-        {
-          "menuId": "101",
-          "quantity": 1,
-          "status": "ordered",
-          "remainingMinutes": 3
-        },
-        {
-          "menuId": "102",
-          "quantity": 1,
-          "status": "ordered",
-          "remainingMinutes": 3
-        },
-        {
-          "menuId": "104",
-          "quantity": 1,
-          "status": "ordered",
-          "remainingMinutes": 2
-        }
-      ],
-      "status": "ordered",
-      "orderTime": "2025-07-21T02:21:21.148Z",
-      "expectedServeTime": "2025-07-21T02:36:21.148Z"
-    }
-  ],
+  "orders": [],
   "roles": [
     {
       "id": "1",
