@@ -59,31 +59,25 @@ export default function Checkout() {
 
   const handlePaid = async (tableId) => {
     try {
-      // 1. Xóa tất cả staffCalls có tableId này
-      const deletePromises = calls
+      // 1. Xoá staffCalls theo tableId
+      const deleteCalls = calls
         .filter(call => call.tableId === tableId)
         .map(call => axios.delete(`http://localhost:9999/staffCalls/${call.id}`));
+      await Promise.all(deleteCalls);
 
-      await Promise.all(deletePromises);
-
-      // 2. Cập nhật status của các order thành "ordered"
+      // 2. Xoá các orders theo tableId
       const tableOrders = orders.filter(order => order.tableId === tableId);
-      const updatePromises = tableOrders.map(order =>
-        axios.put(`http://localhost:9999/orders/${order.id}`, {
-          ...order,
-          status: "ordered"
-        })
+      const deleteOrderPromises = tableOrders.map(order =>
+        axios.delete(`http://localhost:9999/orders/${order.id}`)
       );
-      await Promise.all(updatePromises);
+      await Promise.all(deleteOrderPromises);
 
-      // 3. Cập nhật lại state
+      // 3. Cập nhật state
       setCalls(prev => prev.filter(call => call.tableId !== tableId));
-      setOrders(prev => prev.map(order =>
-        order.tableId === tableId ? { ...order, status: "ordered" } : order
-      ));
+      setOrders(prev => prev.filter(order => order.tableId !== tableId));
       setConfirmedTableId(null);
 
-      alert("Checkout completed and staff calls cleared.");
+      alert("Checkout completed. All orders and staff calls cleared.");
     } catch (error) {
       console.error(error);
       alert("Failed to process payment.");
@@ -160,7 +154,7 @@ export default function Checkout() {
                           </tbody>
                         </Table>
                       </td>
-                    </td>                    
+                    </td>
                     <td>{new Date(checkoutTime).toLocaleString()}</td>
                     <td>{calculateTotal(ordersForTable).toLocaleString()}$</td>
                     <td>

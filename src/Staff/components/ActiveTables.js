@@ -167,6 +167,7 @@ export default function ActiveTables() {
                     <Col xs={12} md={4}>
                         <div className="border p-3"><h6>Order Details</h6>
                             {selectedOrder ? (
+                                 
                                 <>
                                     <Table>
                                         <>
