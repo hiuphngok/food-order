@@ -1,6 +1,5 @@
 {
   "staffCalls": [
-   
     {
       "id": "0449",
       "tableId": 2,
@@ -78,6 +77,24 @@
       "tableId": 2,
       "time": "2025-07-21 09:34:26",
       "status": "pending"
+    },
+    {
+      "id": "dbe2",
+      "tableId": 1,
+      "time": "2025-07-21 10:44:41",
+      "status": "check-out"
+    },
+    {
+      "id": "6043",
+      "tableId": 2,
+      "time": "2025-07-21 10:44:54",
+      "status": "check-out"
+    },
+    {
+      "id": "a511",
+      "tableId": 2,
+      "time": "2025-07-21 10:45:12",
+      "status": "check-out"
     }
   ],
   "tables": [
@@ -320,6 +337,48 @@
       "status": "ordered",
       "orderTime": "2025-07-21T02:21:21.148Z",
       "expectedServeTime": "2025-07-21T02:36:21.148Z"
+    },
+    {
+      "id": "c45a",
+      "tableId": 2,
+      "items": [
+        {
+          "menuId": "101",
+          "quantity": 1,
+          "status": "ordered",
+          "remainingMinutes": 3
+        },
+        {
+          "menuId": "103",
+          "quantity": 1,
+          "status": "ordered",
+          "remainingMinutes": 2
+        }
+      ],
+      "status": "ordered",
+      "orderTime": "2025-07-21T03:44:23.975Z",
+      "expectedServeTime": "2025-07-21T03:59:23.975Z"
+    },
+    {
+      "id": "354c",
+      "tableId": 1,
+      "items": [
+        {
+          "menuId": "105",
+          "quantity": 1,
+          "status": "ordered",
+          "remainingMinutes": 3
+        },
+        {
+          "menuId": "107",
+          "quantity": 1,
+          "status": "ordered",
+          "remainingMinutes": 1
+        }
+      ],
+      "status": "ordered",
+      "orderTime": "2025-07-21T03:44:37.602Z",
+      "expectedServeTime": "2025-07-21T03:59:37.602Z"
     }
   ],
   "roles": [
