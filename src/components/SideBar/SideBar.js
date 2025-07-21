@@ -24,7 +24,7 @@ function SideBar({ onCategorySelect }) {
         overflowY: 'auto'
       }}
     >
-      <h4 className="p-3">Menu</h4>
+      <h4 className="p-3" style={{ color: 'white' }}>Menu</h4>
 
       <Nav className="flex-column flex-grow-1 px-2">
         <Nav.Link

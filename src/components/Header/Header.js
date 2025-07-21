@@ -3,9 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Form, Row, Col, Button, Nav, Container } from 'react-bootstrap';
 import './index.css'
 import { useNavigate } from 'react-router-dom';
-import { hover } from '@testing-library/user-event/dist/hover';
 
-function Header({ setUser, setSearchTerm, hideSearch }) { // vừa bổ sung setSearchTerm
+function Header({ setUser, setSearchTerm, hideSearch }) {
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -16,7 +15,7 @@ function Header({ setUser, setSearchTerm, hideSearch }) { // vừa bổ sung set
   };
 
   const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value); // Cập nhật searchTerm ngay lập tức khi nhập
+    setSearchTerm(e.target.value);
   };
 
   return (

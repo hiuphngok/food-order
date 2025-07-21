@@ -16,7 +16,7 @@ function CardFood({ id, name, price, image, addToCart, serveTime }) {
         <div>
           <Card.Title className="mb-1" style={{ fontSize: '1rem', fontWeight: '600' }}>{name}</Card.Title>
           <Card.Text className="text-muted" style={{ fontSize: '0.9rem' }}>{price.toLocaleString()}₫</Card.Text>
-          <div className="text-muted" style={{ fontSize: '0.8rem' }}>Cook for {serveTime} minutes</div>
+          <div className="text-muted" style={{ fontSize: '0.8rem' }}>Serve time: {serveTime} minutes</div>
         </div>
         <div className="d-flex justify-content-end">
           <Button style={{ backgroundColor: '#FFA500', border: 'none', color: 'white', padding: '4px 12px', borderRadius: '8px', fontWeight: 'bold' }} size="sm" onClick={() => addToCart({ id, name, price, image, serveTime })}>+</Button>

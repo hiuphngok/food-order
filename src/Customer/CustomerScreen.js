@@ -101,6 +101,7 @@ function CustomerScreen({ setUser }) {
         removeItem={removeItem}
         total={total}
         showToast={showToastWithMessage}
+        clearCart={() => setCart([])}
       />
 
       <Button
