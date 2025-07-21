@@ -138,7 +138,7 @@ export default function Checkout() {
                             </tr>
                           </thead>
                           <tbody>
-                            {mergeItemsByMenu(orders).map(item => {
+                            {mergeItemsByMenu(ordersForTable).map(item => {
                               const menuItem = getMenuById(item.menuId);
                               const subtotal = menuItem.price * item.quantity;
 
