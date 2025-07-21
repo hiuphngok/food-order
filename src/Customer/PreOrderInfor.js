@@ -4,7 +4,7 @@ import { Container, Row, Col, Card, Button, Badge, ListGroup, Modal, Form, Alert
 import { Clock, Edit, Trash2, ShoppingCart, CheckCircle, AlertCircle } from 'lucide-react';
 import Header from '../components/Header/Header';
 
-const PreOrderPage = () => {
+const PreOrderPage = ({ setUser }) => {
   const [orderItems, setOrderItems] = useState([]);
   const [menu, setMenu] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
@@ -271,7 +271,7 @@ const PreOrderPage = () => {
 
   return (
     <Container fluid className="py-4" style={{ backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
-      <Row><Header /></Row>
+      <Row><Header setUser={setUser} hideSearch={true} /></Row>
       <Row className='p-5'>
         <Col md={12} className="p-4">
           <h2 className="mb-4">Pre-Order Information</h2>
@@ -365,7 +365,7 @@ const PreOrderPage = () => {
       </Row>
 
       <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
-        <Modal.Header closeButton><Modal.Title>Edit Item Quantity</Modal.Title></Modal.Header>
+        <Modal.Header closeButton><Modal.Title>Edit Food Quantity</Modal.Title></Modal.Header>
         <Modal.Body>
           {editItem && (
             <Form>

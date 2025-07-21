@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Button, ListGroup } from 'react-bootstrap';
 import axios from 'axios';
 
-function CartModal({ show, onClose, cart, changeQuantity, removeItem, total, showToast }) {
+function CartModal({ show, onClose, cart, changeQuantity, removeItem, total, showToast, clearCart }) {
   const [menuData, setMenuData] = useState([]);
 
   useEffect(() => {
@@ -55,6 +55,7 @@ function CartModal({ show, onClose, cart, changeQuantity, removeItem, total, sho
     axios.post("http://localhost:9999/orders", newOrder)
       .then(() => {
         showToast("Order submitted successfully!");
+        clearCart();
         onClose();
       })
       .catch(err => {
