@@ -68,7 +68,18 @@ export default function AccountManager() {
 
   return (
     <>
-      
+      <style>
+        {`
+          .sticky-details {
+            position: sticky;
+            top: 20px;
+            align-self: flex-start;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding-right: 12px;
+          }
+        `}
+      </style>
 
       <Container>
         <h3 className="my-3">Account Manager</h3>
@@ -152,7 +163,7 @@ export default function AccountManager() {
             </Table>
           </Col>
 
-          <Col xs={6}>
+          <Col xs={6} className="sticky-details">
             <h6>Account Details</h6>
             {selectedUser ? (
               <Form

@@ -84,6 +84,18 @@ export default function MenuManager(){
 
     return(
         <>
+        <style>
+        {`
+            .sticky-details {
+            position: sticky;
+            top: 20px;
+            align-self: flex-start;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding-right: 12px;
+            }
+        `}
+        </style>
         <h3 className="my-3">Menu Manager</h3>
         <Button className="mb-3" onClick={() => {
             setSelectedProduct({
@@ -168,7 +180,7 @@ export default function MenuManager(){
                             </Table>
                         </Row>
                 </Col>
-                <Col xs={6}>
+                <Col xs={6} className="sticky-details">
                     <h6>Product Details</h6>
                     {selectedProduct ? (
                         <Form
