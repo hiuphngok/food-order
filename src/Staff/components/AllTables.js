@@ -34,7 +34,7 @@ export default function AllTables() {
         const expected = new Date(now.getTime() + 15 * 60000); // +15 phút
 
         const newOrder = {
-            tableId: tableId,
+            tableId: Number(tableId),
             status: "pending",
             orderTime: now.toISOString(),
             expectedServeTime: expected.toISOString(),
