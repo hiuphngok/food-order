@@ -207,7 +207,7 @@
   ],
   "points": [
     {
-      "phoneID": "1",
+      "id": "1",
       "phoneNumber": "0123456789",
       "usePoint": 50000
     }
@@ -219,7 +219,7 @@
       "status": "pending",
       "orderTime": "2025-07-20T17:38:45.360Z",
       "expectedServeTime": "2025-07-20T17:53:45.360Z",
-      "phoneID": "1",
+      "pointId": "1",
       "items": []
     }
   ],
