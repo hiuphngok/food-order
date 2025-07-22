@@ -86,6 +86,8 @@ export default function AllTables() {
             });
     };
 
+    const tablesPendingOrders =  (tableId) => orders.some(order => Number(order.tableId) === Number(tableId) && order.status === 'pending') || null;
+
     const filteredSearchTablesNames = setSearch ? tables.filter(tables => tables.name.toLowerCase().includes(search.toLowerCase())) : tables;
 
     const getOrder = (tableId) =>
@@ -169,7 +171,7 @@ export default function AllTables() {
                                     <Card style={{ marginBottom: '16px' }}>
                                         <Card.Body>
                                             <Card.Title>Table: {table.name}</Card.Title>
-                                            {getOrder(table.id) ? (
+                                            {tablesPendingOrders(table.id) ? (
                                                 <>
                                                     <Card.Subtitle className="mb-2 text-muted">
                                                         Order ID: {getOrder(table.id).id}

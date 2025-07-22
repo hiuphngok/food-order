@@ -205,7 +205,16 @@
       "stock": 100
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "id": "bfbc",
+      "tableId": "1",
+      "status": "pending",
+      "orderTime": "2025-07-20T17:38:45.360Z",
+      "expectedServeTime": "2025-07-20T17:53:45.360Z",
+      "items": []
+    }
+  ],
   "roles": [
     {
       "id": "1",
