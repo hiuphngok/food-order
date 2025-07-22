@@ -212,15 +212,21 @@
       "usePoint": 50000
     }
   ],
-  "orders": [
+  "orders": [  
     {
-      "id": "bfbc",
-      "tableId": "1",
-      "status": "pending",
-      "orderTime": "2025-07-20T17:38:45.360Z",
-      "expectedServeTime": "2025-07-20T17:53:45.360Z",
-      "phoneID": "1",
-      "items": []
+      "id": "fe95",
+      "tableId": 2,
+      "items": [
+        {
+          "menuId": "101",
+          "quantity": 1,
+          "status": "ordered",
+          "remainingMinutes": 3
+        }
+      ],
+      "status": "ordered",
+      "orderTime": "2025-07-22T15:10:59.546Z",
+      "expectedServeTime": "2025-07-22T15:25:59.546Z"
     }
   ],
   "roles": [
