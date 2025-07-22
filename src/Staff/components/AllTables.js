@@ -86,7 +86,7 @@ export default function AllTables() {
             });
     };
 
-    const tablesPendingOrders =  (tableId) => orders.some(order => Number(order.tableId) === Number(tableId) && order.status === 'ordered') || null;
+    const tablesPendingOrders = (tableId) => orders.some(order => Number(order.tableId) === Number(tableId) && order.status !== 'checked') || null;
 
     const filteredSearchTablesNames = setSearch ? tables.filter(tables => tables.name.toLowerCase().includes(search.toLowerCase())) : tables;
 
@@ -145,7 +145,7 @@ export default function AllTables() {
                 alert("Failed to delete order item.");
             });
     };
-
+    
     return (
         <>
             <Container>
@@ -254,7 +254,7 @@ export default function AllTables() {
                                                         </Button>
                                                     </td>
                                                     <td>
-                                                        {item.status}
+                                                        {item.status} {item.status === 'ordered' && <h6 className="text-danger">new order</h6>}
                                                         <DropdownButton
                                                             as={ButtonGroup}
                                                             size="sm"

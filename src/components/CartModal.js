@@ -16,11 +16,12 @@ function CartModal({ show, onClose, cart, changeQuantity, removeItem, total, sho
     return item?.serveTime || 2;
   };
 
-  const handleSubmitOrder = () => {
+  const handleSubmitOrder = async () => {
     if (cart.length === 0) {
       showToast("Your cart is empty. Please add some items before ordering.");
       return;
     }
+
     const invalidItems = cart.filter(item => {
       const menuItem = menuData.find(m => m.id == item.id);
       return item.quantity > menuItem.stock;
@@ -44,25 +45,54 @@ function CartModal({ show, onClose, cart, changeQuantity, removeItem, total, sho
       remainingMinutes: getServeTime(item.id)
     }));
 
-    const newOrder = {
-      tableId,
-      items: itemsWithServeTime,
-      status: 'ordered',
-      orderTime: new Date().toISOString(),
-      expectedServeTime: new Date(Date.now() + 15 * 60000).toISOString()
-    };
+    try {
+      // Tìm order đang "ordered" của bàn
+      const res = await axios.get(`http://localhost:9999/orders?tableId=${tableId}&status=ordered`);
+      const existingOrder = res.data[0];
 
-    axios.post("http://localhost:9999/orders", newOrder)
-      .then(() => {
+      if (existingOrder) {
+        // Gộp các món mới vào order cũ
+        const updatedItems = [...existingOrder.items];
+
+        itemsWithServeTime.forEach(newItem => {
+          const existing = updatedItems.find(i => i.menuId === newItem.menuId && i.status === 'ordered');
+          if (existing) {
+            existing.quantity += newItem.quantity;
+            existing.remainingMinutes = Math.max(existing.remainingMinutes, newItem.remainingMinutes); // giữ lại thời gian phục vụ lâu hơn
+          } else {
+            updatedItems.push(newItem);
+          }
+        });
+
+        // Cập nhật order cũ
+        await axios.put(`http://localhost:9999/orders/${existingOrder.id}`, {
+          ...existingOrder,
+          items: updatedItems
+        });
+
+        showToast("Order updated successfully!");
+      } else {
+        // Nếu chưa có order, tạo mới như trước
+        const newOrder = {
+          tableId,
+          items: itemsWithServeTime,
+          status: 'ordered',
+          orderTime: new Date().toISOString(),
+          expectedServeTime: new Date(Date.now() + 15 * 60000).toISOString()
+        };
+
+        await axios.post("http://localhost:9999/orders", newOrder);
         showToast("Order submitted successfully!");
-        clearCart();
-        onClose();
-      })
-      .catch(err => {
-        console.error(err);
-        showToast("Failed to submit order. Please try again.");
-      });
+      }
+
+      clearCart();
+      onClose();
+    } catch (err) {
+      console.error(err);
+      showToast("Failed to submit order. Please try again.");
+    }
   };
+
 
   return (
     <Modal show={show} onHide={onClose}>
@@ -99,6 +129,7 @@ function CartModal({ show, onClose, cart, changeQuantity, removeItem, total, sho
                 <div className="d-flex align-items-center">
                   <Button size="sm" variant="outline-secondary" onClick={() => changeQuantity(item.id, -1)}>-</Button>
                   <div
+                    ty
                     style={{
                       padding: '3.5px 0px',
                       border: '1px solid #ccc',

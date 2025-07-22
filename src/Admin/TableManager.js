@@ -22,9 +22,9 @@ export default function TableManager() {
       axios.get("http://localhost:9999/orders")
         .then(res => setOrders(res.data));
     }
-    
+
     fetchData();
-      window.addEventListener("user-updated", fetchData);
+    window.addEventListener("user-updated", fetchData);
 
     return () => {
       window.removeEventListener("user-updated", fetchData);
@@ -101,15 +101,15 @@ export default function TableManager() {
             <tbody>
               {tables.map((t) => (
                 <tr key={t.id}
-                    style={{
-                      backgroundColor: selectedTable?.id === t.id ? "#e0f7ff" : "transparent",
-                      fontWeight: selectedTable?.id === t.id ? "bold" : "normal"
-                    }}
+                  style={{
+                    backgroundColor: selectedTable?.id === t.id ? "#e0f7ff" : "transparent",
+                    fontWeight: selectedTable?.id === t.id ? "bold" : "normal"
+                  }}
                 >
                   <td>{t.id}</td>
                   <td>{t.name}</td>
                   <td>
-                    {orders.some(o => o.tableId == t.id && o.status === "pending") ? (
+                    {orders.some(o => o.tableId == t.id && o.status === "ordered") ? (
                       <span className="badge bg-success">Active</span>
                     ) : (
                       <span className="badge bg-danger">Inactive</span>

@@ -214,23 +214,8 @@
   ],
   "orders": [
     {
-      "id": "1095",
-      "tableId": 1,
-      "items": [
-        {
-          "menuId": "101",
-          "quantity": 1,
-          "status": "received",
-          "remainingMinutes": 3
-        }
-      ],
-      "status": "checked",
-      "orderTime": "2025-07-22T16:05:17.499Z",
-      "expectedServeTime": "2025-07-22T16:20:17.499Z"
-    },
-    {
-      "id": "13ba",
-      "tableId": 1,
+      "id": "1a5c",
+      "tableId": 2,
       "items": [
         {
           "menuId": "101",
@@ -240,41 +225,11 @@
         }
       ],
       "status": "ordered",
-      "orderTime": "2025-07-22T16:08:37.979Z",
-      "expectedServeTime": "2025-07-22T16:23:37.979Z"
+      "orderTime": "2025-07-22T17:27:18.006Z",
+      "expectedServeTime": "2025-07-22T17:42:18.006Z"
     },
     {
-      "id": "11ac",
-      "tableId": 2,
-      "items": [
-        {
-          "menuId": "101",
-          "quantity": 1,
-          "status": "received",
-          "remainingMinutes": 3
-        }
-      ],
-      "status": "checked",
-      "orderTime": "2025-07-22T16:44:53.208Z",
-      "expectedServeTime": "2025-07-22T16:59:53.208Z"
-    },
-    {
-      "id": "a8b0",
-      "tableId": 2,
-      "items": [
-        {
-          "menuId": "101",
-          "quantity": 1,
-          "status": "ordered",
-          "remainingMinutes": 3
-        }
-      ],
-      "status": "checked",
-      "orderTime": "2025-07-22T16:50:18.504Z",
-      "expectedServeTime": "2025-07-22T17:05:18.504Z"
-    },
-    {
-      "id": "fee1",
+      "id": "e039",
       "tableId": 2,
       "items": [
         {
@@ -284,24 +239,9 @@
           "remainingMinutes": 2
         }
       ],
-      "status": "checked",
-      "orderTime": "2025-07-22T17:07:37.797Z",
-      "expectedServeTime": "2025-07-22T17:22:37.797Z"
-    },
-    {
-      "id": "b60b",
-      "tableId": 2,
-      "items": [
-        {
-          "menuId": "101",
-          "quantity": 1,
-          "status": "ordered",
-          "remainingMinutes": 3
-        }
-      ],
       "status": "ordered",
-      "orderTime": "2025-07-22T17:09:05.789Z",
-      "expectedServeTime": "2025-07-22T17:24:05.789Z"
+      "orderTime": "2025-07-22T17:29:48.493Z",
+      "expectedServeTime": "2025-07-22T17:44:48.493Z"
     }
   ],
   "roles": [

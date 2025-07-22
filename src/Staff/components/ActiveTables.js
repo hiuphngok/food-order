@@ -100,23 +100,22 @@ export default function ActiveTables() {
     };
 
     const handleDelete = () => {
-            if (!selectedOrder?.id) return alert("Can not define order!");
-    
-            axios
-                .delete(`http://localhost:9999/orders/${selectedOrder.id}`)
-                .then(() => {
-                    setOrders(orders.filter((item) => item.id !== selectedOrder.id));
-                    setSelectedOrder(null);
-                    setIsAdding(false);
-                    console.log("Deleted order item successfully.");
-                    alert("Deleted order item successfully.");
-                })
-                .catch((err) => {
-                    console.error(err);
-                    alert("Failed to delete order item.");
-                });
-        };
-    
+        if (!selectedOrder?.id) return alert("Can not define order!");
+
+        axios
+            .delete(`http://localhost:9999/orders/${selectedOrder.id}`)
+            .then(() => {
+                setOrders(orders.filter((item) => item.id !== selectedOrder.id));
+                setSelectedOrder(null);
+                setIsAdding(false);
+                console.log("Deleted order item successfully.");
+                alert("Deleted order item successfully.");
+            })
+            .catch((err) => {
+                console.error(err);
+                alert("Failed to delete order item.");
+            });
+    };
 
     return (
         <>
@@ -205,7 +204,7 @@ export default function ActiveTables() {
                                                             </Button>
                                                         </td>
                                                         <td>
-                                                            {item.status}
+                                                            {item.status}{item.status === 'ordered' && <h6 className="text-danger">new order</h6>}
                                                             <DropdownButton
                                                                 as={ButtonGroup}
                                                                 size="sm"

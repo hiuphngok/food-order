@@ -68,7 +68,13 @@ export default function OrderManager() {
                     >
                       <td>{o.id}</td>
                       <td>{getTableName(o.tableId)}</td>
-                      <td>{o.status}</td>
+                      <td>
+                        {o.status === "ordered" ? (
+                          <span className="badge bg-warning">Ordered</span>
+                        ) : (
+                          <span className="badge bg-success">Checked</span>
+                        )}
+                        </td>
                       <td>{new Date(o.orderTime).toLocaleString()}</td>
                       <td>
                         <Button
