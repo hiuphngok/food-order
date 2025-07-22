@@ -139,7 +139,7 @@ export default function ActiveTables() {
                     <Col xs={12} md={8}>
                         <Row>
                             {filteredSearchTablesNames.map((o) => (
-                                o.status !== "ordered" && (
+                                o.status !== "checked" && (
                                     <Col xs={12} md={6} lg={6} key={o.id}>
                                         <Card style={{ marginBottom: '16px' }}>
                                             <Card.Body>

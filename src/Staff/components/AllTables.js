@@ -35,7 +35,7 @@ export default function AllTables() {
 
         const newOrder = {
             tableId: Number(tableId),
-            status: "pending",
+            status: "ordered",
             orderTime: now.toISOString(),
             expectedServeTime: expected.toISOString(),
             items: []
@@ -86,7 +86,7 @@ export default function AllTables() {
             });
     };
 
-    const tablesPendingOrders =  (tableId) => orders.some(order => Number(order.tableId) === Number(tableId) && order.status === 'pending') || null;
+    const tablesPendingOrders =  (tableId) => orders.some(order => Number(order.tableId) === Number(tableId) && order.status === 'ordered') || null;
 
     const filteredSearchTablesNames = setSearch ? tables.filter(tables => tables.name.toLowerCase().includes(search.toLowerCase())) : tables;
 

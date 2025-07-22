@@ -11,7 +11,7 @@ function CustomerScreen({ setUser }) {
   const [toastMessage, setToastMessage] = useState('');
   const [showToast, setShowToast] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [menu, setMenu] = useState([]); // ✅ Add this
+  const [menu, setMenu] = useState([]); 
 
   const showToastWithMessage = (msg) => {
     setToastMessage(msg);
