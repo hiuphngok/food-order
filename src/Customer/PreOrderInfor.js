@@ -17,7 +17,7 @@ const PreOrderPage = ({ setUser }) => {
 
   // Hàm làm mới dữ liệu
   const fetchOrders = () => {
-    axios.get(`http://localhost:9999/orders?tableId=${tableId}`)
+    axios.get(`http://localhost:9999/orders?tableId=${tableId}&status=ordered`)
       .then(res => {
         const allOrders = res.data;
         const allItems = allOrders.flatMap(order => order.items.map(item => ({
