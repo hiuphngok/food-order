@@ -8,6 +8,8 @@ import { useEffect } from "react";
 const StaffCall = () => {
     const [calls, setCalls] = useState([]);
     const [showCalls, setShowCalls] = useState(false);
+    const [orders, setOrders] = useState([]);
+    const [tables, setTables] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:9999/staffCalls')
@@ -15,6 +17,24 @@ const StaffCall = () => {
             .then(data => {
                 console.log(data);
                 setCalls(data);
+            })
+    }, [])
+
+       useEffect(() => {
+        fetch('http://localhost:9999/tables')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setTables(data);
+            })
+    }, [])
+
+       useEffect(() => {
+        fetch('http://localhost:9999/orders')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setOrders(data);
             })
     }, [])
 
@@ -40,6 +60,8 @@ const StaffCall = () => {
             })
             .catch(error => console.error('Error updating call:', error));
     }
+
+    const tableIsActive =  (tableId) => orders.some(order => Number(order.tableId) === Number(tableId) && order.status === 'pending') || null;
 
     const pendingCallsNumber = calls.filter(call => call.status === 'pending').length;
 
