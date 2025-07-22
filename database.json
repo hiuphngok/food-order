@@ -207,30 +207,63 @@
   ],
   "points": [
     {
-      "id": "1",
-      "phoneNumber": "0123456789",
-      "usePoint": 51870
+      "id": "3eae",
+      "phoneNumber": "0987654321",
+      "usePoint": 12900
     }
   ],
   "orders": [
     {
-      "id": "1a5c",
+      "id": "4c22",
       "tableId": 2,
       "items": [
         {
           "menuId": "101",
           "quantity": 1,
-          "status": "ordered",
+          "status": "received",
+          "remainingMinutes": 3
+        },
+        {
+          "menuId": "104",
+          "quantity": 1,
+          "status": "received",
+          "remainingMinutes": 2
+        },
+        {
+          "menuId": "105",
+          "quantity": 1,
+          "status": "received",
           "remainingMinutes": 3
         }
       ],
-      "status": "ordered",
-      "orderTime": "2025-07-22T17:27:18.006Z",
-      "expectedServeTime": "2025-07-22T17:42:18.006Z"
+      "status": "checked",
+      "orderTime": "2025-07-22T21:12:52.386Z",
+      "expectedServeTime": "2025-07-22T21:27:52.386Z"
     },
     {
-      "id": "e039",
-      "tableId": 2,
+      "id": "b59f",
+      "tableId": 1,
+      "items": [
+        {
+          "menuId": "101",
+          "quantity": 1,
+          "status": "received",
+          "remainingMinutes": 3
+        },
+        {
+          "menuId": "103",
+          "quantity": 1,
+          "status": "received",
+          "remainingMinutes": 2
+        }
+      ],
+      "status": "checked",
+      "orderTime": "2025-07-22T21:41:07.998Z",
+      "expectedServeTime": "2025-07-22T21:56:07.998Z"
+    },
+    {
+      "id": "da66",
+      "tableId": 1,
       "items": [
         {
           "menuId": "103",
@@ -240,8 +273,8 @@
         }
       ],
       "status": "ordered",
-      "orderTime": "2025-07-22T17:29:48.493Z",
-      "expectedServeTime": "2025-07-22T17:44:48.493Z"
+      "orderTime": "2025-07-22T21:42:50.742Z",
+      "expectedServeTime": "2025-07-22T21:57:50.742Z"
     }
   ],
   "roles": [
