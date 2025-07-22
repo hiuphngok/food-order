@@ -65,12 +65,16 @@ export default function Checkout() {
         .map(call => axios.delete(`http://localhost:9999/staffCalls/${call.id}`));
       await Promise.all(deleteCalls);
 
-      // 2. Xoá các orders theo tableId
+      // 2. Cập nhật status các orders theo tableId thành "ordered"
       const tableOrders = orders.filter(order => order.tableId === tableId);
-      const deleteOrderPromises = tableOrders.map(order =>
-        axios.delete(`http://localhost:9999/orders/${order.id}`)
-      );
-      await Promise.all(deleteOrderPromises);
+
+      const updateOrderPromises = tableOrders.map(order => {
+        const updatedOrder = { ...order, status: 'ordered' }; // chỉ đổi status
+        return axios.put(`http://localhost:9999/orders/${order.id}`, updatedOrder);
+      });
+
+      await Promise.all(updateOrderPromises);
+
 
       // 3. Cập nhật state
       setCalls(prev => prev.filter(call => call.tableId !== tableId));
