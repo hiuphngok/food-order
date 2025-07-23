@@ -91,6 +91,8 @@ export default function Checkout() {
     setShowConfirmModal(false);
     setPhoneNumber("");
     setCurrentCustomerPoints(0);
+    setUsePoints(false); // Reset checkbox sử dụng điểm
+    setConfirmedTableId(currentTableId); // Vẫn cho phép thanh toán
   };
 
   const handleBackToPhone = () => {
