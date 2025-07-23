@@ -22,7 +22,7 @@ export default function App() {
 
   useEffect(() => {
     const checkUser = () => {
-      const savedUser = JSON.parse(localStorage.getItem("user"));
+      const savedUser = JSON.parse(sessionStorage.getItem("user"));
       if (savedUser) setUser(savedUser);
     };
 

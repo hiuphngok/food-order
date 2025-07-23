@@ -6,10 +6,10 @@ import { useNavigate } from 'react-router-dom';
 
 function Header({ setUser, setSearchTerm, hideSearch }) {
   const navigate = useNavigate()
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(sessionStorage.getItem("user"));
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
     setUser(null);
     navigate("/login");
   };

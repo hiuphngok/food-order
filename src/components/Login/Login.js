@@ -25,7 +25,7 @@ export default function Login({ setUser }) {
         return;
       }
 
-      localStorage.setItem("user", JSON.stringify(user));
+      sessionStorage.setItem("user", JSON.stringify(user));
       setUser(user);
 
       switch (user.roleId) {
