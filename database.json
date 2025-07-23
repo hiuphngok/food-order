@@ -209,7 +209,7 @@
     {
       "id": "3eae",
       "phoneNumber": "0987654321",
-      "usePoint": 12900
+      "usePoint": 11150
     }
   ],
   "orders": [
@@ -277,13 +277,55 @@
         {
           "menuId": "114",
           "quantity": 1,
-          "status": "ordered",
+          "status": "received",
           "remainingMinutes": 1
         }
       ],
-      "status": "ordered",
+      "status": "checked",
       "orderTime": "2025-07-23T00:55:22.399Z",
       "expectedServeTime": "2025-07-23T01:10:22.399Z"
+    },
+    {
+      "id": "a359",
+      "tableId": 2,
+      "items": [
+        {
+          "menuId": "101",
+          "quantity": 1,
+          "status": "received",
+          "remainingMinutes": 3
+        },
+        {
+          "menuId": "102",
+          "quantity": 1,
+          "status": "received",
+          "remainingMinutes": 3
+        },
+        {
+          "menuId": "103",
+          "quantity": 1,
+          "status": "received",
+          "remainingMinutes": 2
+        }
+      ],
+      "status": "checked",
+      "orderTime": "2025-07-23T01:17:20.411Z",
+      "expectedServeTime": "2025-07-23T01:32:20.411Z"
+    },
+    {
+      "id": "1448",
+      "tableId": 1,
+      "items": [
+        {
+          "menuId": "112",
+          "quantity": 1,
+          "status": "received",
+          "remainingMinutes": 1
+        }
+      ],
+      "status": "checked",
+      "orderTime": "2025-07-23T01:18:17.771Z",
+      "expectedServeTime": "2025-07-23T01:33:17.771Z"
     }
   ],
   "roles": [

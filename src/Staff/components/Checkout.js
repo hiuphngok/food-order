@@ -111,12 +111,19 @@ export default function Checkout() {
 
   const calculateFinalTotal = () => {
     let finalTotal = currentTotal;
-    if (usePoints && currentCustomerPoints > 0) {
-      finalTotal = Math.max(0, currentTotal - currentCustomerPoints);
+    if (usePoints && currentCustomerPoints > 0 && phoneNumber.trim()) {
+      const pointsUsed = Math.min(currentCustomerPoints, currentTotal);
+      finalTotal = Math.max(0, currentTotal - pointsUsed);
     }
     return finalTotal;
   };
 
+  const calculatePointsUsed = () => {
+    if (usePoints && currentCustomerPoints > 0 && phoneNumber.trim()) {
+      return Math.min(currentCustomerPoints, currentTotal);
+    }
+    return 0;
+  };
   const calculateEarnedPoints = () => {
     return Math.floor(currentTotal * 0.05);
   };
@@ -125,15 +132,16 @@ export default function Checkout() {
     try {
       const finalTotal = calculateFinalTotal();
       const earnedPoints = calculateEarnedPoints();
-
+      const pointsUsed = calculatePointsUsed();
       if (phoneNumber.trim()) {
         const existingCustomer = points.find(p => p.phoneNumber === phoneNumber);
 
         if (existingCustomer) {
           let currentPoints = existingCustomer.usePoint || 0;
           let newPoints = currentPoints + earnedPoints;
-          if (usePoints && currentCustomerPoints > 0) {
-            newPoints = Math.max(0, newPoints - currentCustomerPoints);
+
+          if (pointsUsed > 0) {
+            newPoints = Math.max(0, newPoints - pointsUsed);
           }
 
           await axios.put(`http://localhost:9999/points/${existingCustomer.id}`, {
@@ -186,8 +194,11 @@ export default function Checkout() {
       setUsePoints(false);
       setCurrentTableId(null);
       setCurrentTotal(0);
-
-      alert(`Checkout completed. ${phoneNumber ? ` Points earned: ${earnedPoints}` : ''} Total: ${finalTotal}đ`);
+      if (phoneNumber.trim()) {
+        alert(`Checkout completed\nPoints earned: +${earnedPoints}\nPoint used: -${pointsUsed}\nTotal: ${finalTotal.toLocaleString()}đ`);
+      } else {
+        alert(`Checkout completed\nTotal: ${finalTotal.toLocaleString()}đ`);
+      }
     } catch (error) {
       console.error(error);
       alert("Failed to process payment.");
@@ -282,7 +293,7 @@ export default function Checkout() {
             <div className="text-center">
               <h4>Scan to pay</h4>
               <h1>QR code here</h1>
-              {phoneNumber && (
+              {phoneNumber.trim() && (
                 <div className="mb-3">
                   <Alert variant="info">
                     <strong>SĐT:</strong> {phoneNumber}<br />
@@ -291,18 +302,18 @@ export default function Checkout() {
                     <strong>Tổng tiền gốc:</strong> {currentTotal.toLocaleString()}đ<br />
                     {usePoints && currentCustomerPoints > 0 && (
                       <>
-                        <strong>Điểm sử dụng:</strong> -{currentCustomerPoints.toLocaleString()}<br />
-                        <strong>Thành tiền:</strong> {calculateFinalTotal().toLocaleString()}đ
+                        <strong>Điểm sử dụng:</strong> -{calculatePointsUsed().toLocaleString()}<br />
                       </>
                     )}
+                    <strong>Thành tiền:</strong> {calculateFinalTotal().toLocaleString()}đ
                   </Alert>
 
                   <Form.Check
                     type="checkbox"
-                    label={`Sử dụng ${currentCustomerPoints.toLocaleString()} điểm để giảm giá`}
+                    label={`Sử dụng tối đa ${Math.min(currentCustomerPoints, currentTotal).toLocaleString()} điểm để giảm giá`}
                     checked={usePoints}
                     onChange={(e) => setUsePoints(e.target.checked)}
-                    disabled={currentCustomerPoints === 0}
+                    disabled={currentCustomerPoints === 0 || currentTotal === 0}
                   />
                 </div>
               )}
