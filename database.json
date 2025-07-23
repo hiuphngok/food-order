@@ -254,6 +254,36 @@
       "status": "checked",
       "orderTime": "2025-07-22T21:42:50.742Z",
       "expectedServeTime": "2025-07-22T21:57:50.742Z"
+    },
+    {
+      "id": "04bd",
+      "tableId": 1,
+      "items": [
+        {
+          "menuId": "101",
+          "quantity": 1,
+          "status": "ordered",
+          "remainingMinutes": 3
+        }
+      ],
+      "status": "checked",
+      "orderTime": "2025-07-23T00:52:17.278Z",
+      "expectedServeTime": "2025-07-23T01:07:17.278Z"
+    },
+    {
+      "id": "b5e6",
+      "tableId": 1,
+      "items": [
+        {
+          "menuId": "114",
+          "quantity": 1,
+          "status": "ordered",
+          "remainingMinutes": 1
+        }
+      ],
+      "status": "ordered",
+      "orderTime": "2025-07-23T00:55:22.399Z",
+      "expectedServeTime": "2025-07-23T01:10:22.399Z"
     }
   ],
   "roles": [
