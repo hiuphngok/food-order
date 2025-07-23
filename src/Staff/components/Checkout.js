@@ -54,7 +54,7 @@ export default function Checkout() {
     tables.find((t) => Number(t.id) === Number(tableId))?.name || "Unknown";
 
   const getOrdersByTableId = (tableId) =>
-    orders.filter(order => order.tableId === tableId && order.status !== 'checked');
+    orders.filter(order => order.tableId === tableId && order.status === 'ordered');
 
   const getMenuById = (menuId) =>
     menu.find(item => item.id === menuId) || {};

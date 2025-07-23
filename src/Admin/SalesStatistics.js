@@ -13,10 +13,8 @@ export default function SalesStatistics() {
   }, []);
 
   useEffect(() => {
-    // Lọc các đơn hàng đã thanh toán
-    const paidOrders = orders.filter((o) => o.status == "ordered");
+    const paidOrders = orders.filter((o) => o.status == "checked");
 
-    // Tính toán số lượng bán cho mỗi món
     const productSales = {};
 
     paidOrders.forEach((order) => {
